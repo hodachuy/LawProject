@@ -42,7 +42,7 @@ namespace LawProject.WebApi.Controllers.v1
 
         // POST api/<controller>
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Post(CreateProductCommand command)
         {
             return Ok(await Mediator.Send(command));

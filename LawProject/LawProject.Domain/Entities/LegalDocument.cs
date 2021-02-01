@@ -10,13 +10,13 @@ namespace LawProject.Domain.Entities
         public long LegalID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Summary { get; set; }
         public DateTime? IssuedDate { get; set; }
         public DateTime? EffectiveDate { get; set; }
         public string PublishNo { get; set; }
         public DateTime? PublishedDate { get; set; }
         public DateTime? ExpirationDate { get; set; }
-        public bool IsDeleted { get; set; } // IsDelete
-        public bool IsEffected { get; set; } // IsEffect
+        public bool IsPublish { get; set; } // IsEffect
         public int? DocTypeID { get; set; }
         public int? AgencyID { get; set; }
         public int? AreaID { get; set; }
@@ -24,14 +24,14 @@ namespace LawProject.Domain.Entities
         public string Notes { get; set; }
         public string SigningTitle { get; set; }
         public string SignerName { get; set; }
-        public int ViewCount { get; set; }
+        public long ViewCount { get; set; }
         public int? EditorID { get; set; }
         public long? LegalTypeID { get; set; } // TypeLegalID
         public long? LegalRefID { get; set; } // RefLegalID
         public string Content { get; set; } // TextHtml toàn văn
-        public string TableOfContents { get; set; } // StructureHtml mục lục
+        public string TableOfContents { get; set; } // StructureHtml
         public int? LegalGroupID { get; set; }
-        public int Status { get; set; }
+        public int StatusID { get; set; } //Status
         public string EnglishContent { get; set; } // ContentEnglish
         public string BookAuthor { get; set; }
         public string CombineAgencyIDs { get; set; }

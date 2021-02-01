@@ -1,21 +1,19 @@
 ﻿using LawProject.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using LawProject.Domain.Enum;
 
 namespace LawProject.Domain.Entities
 {
     public class Question : AuditableBaseEntity
     {
         public long QuesID { get; set; }
-        public string Contents { get; set; }
+        public string QuesCode { get; set; }
+        public string QuesContent { get; set; }// Contents
         public string Title { get; set; }
-        public string AttachFileUrl { get; set; }
         public string AccountID { get; set; }
-        public string IsDelete { get; set; }
         public string AreaID { get; set; }
-        public string AreaTitle { get; set; }
-        public string ContentsText { get; set; }
-        public string ContentsAnswer { get; set; }
+        public string QuesContentText { get; set; }
+        public Status.QuestionAnswer StatusID { get; set; } //Status
+        public bool IsTraining { get; set; }// IsToAPI
+        public long ViewCount { get; set; } // CountView
     }
 }

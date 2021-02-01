@@ -32,7 +32,7 @@ namespace LawProject.WebApi
             //Initialize Logger
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config)
-                .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+                //.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             Log.Information("Starting up");

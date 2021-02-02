@@ -23,6 +23,14 @@ namespace LawProject.Domain.Enum
             TransferLawyer = 10, // chuyển luật sư
         }
 
+        public enum Notify
+        {
+            SHOW_NOT_READ,
+            HIDDEN_NOT_READ,
+            SHOW_READED,
+            HIDDEN_READED
+        }
+
         /// <summary>
         /// User online status
         /// </summary>

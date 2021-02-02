@@ -14,6 +14,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.ToTable("Products");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
+            builder.Property(x => x.IsDelete).HasDefaultValue(false);
         }
     }
 }

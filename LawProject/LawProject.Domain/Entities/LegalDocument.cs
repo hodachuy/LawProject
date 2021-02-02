@@ -1,4 +1,5 @@
 ﻿using LawProject.Domain.Common;
+using LawProject.Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,8 +31,8 @@ namespace LawProject.Domain.Entities
         public long? LegalRefID { get; set; } // RefLegalID
         public string Content { get; set; } // TextHtml toàn văn
         public string TableOfContents { get; set; } // StructureHtml
-        public int? LegalGroupID { get; set; }
-        public int StatusID { get; set; } //Status
+        public long? LegalGroupID { get; set; }
+        public Status.Legal StatusValue { get; set; } //Status
         public string EnglishContent { get; set; } // ContentEnglish
         public string BookAuthor { get; set; }
         public string CombineAgencyIDs { get; set; }

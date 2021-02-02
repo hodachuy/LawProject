@@ -34,7 +34,7 @@ namespace LawProject.Infrastructure.Identity
             {
                 services.AddDbContext<IdentityContext>(options =>
                 options.UseNpgsql(
-                    configuration.GetConnectionString("IdentityConnection"),
+                    configuration.GetConnectionString("LawProjectConnection"),//IdentityConnection
                     b => b.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName)));
             }
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();

@@ -25,6 +25,29 @@ namespace LawProject.Infrastructure.Persistence.Contexts
             _authenticatedUser = authenticatedUser;
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Activity> Activities { get; set; }
+        public DbSet<Agency> Agencies { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Chapter> Chapters { get; set; }
+        public DbSet<District> Districts { get; set; }
+        public DbSet<DocumentsType> DocumentsTypes { get; set; }
+        public DbSet<Editor> Editors { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<LegalDocument> LegalDocuments { get; set; }
+        public DbSet<LegalDocumentGroup> LegalDocumentGroups { get; set; }
+        public DbSet<LegalDocumentRelate> LegalDocumentRelates { get; set; }
+        public DbSet<LegalDocumentType> LegalDocumentTypes { get; set; }
+        public DbSet<Notifiation> Notifications { get; set; }
+        public DbSet<Page> Pages { get; set; }
+        public DbSet<Part> Parts { get; set; }
+        public DbSet<Province> Provinces { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<QuestionTag> QuestionTags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Ward> Wards { get; set; }
+
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

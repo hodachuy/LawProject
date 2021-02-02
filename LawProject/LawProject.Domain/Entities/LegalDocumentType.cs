@@ -8,7 +8,7 @@ namespace LawProject.Domain.Entities
 {
     public class LegalDocumentType
     {
-        public long LegalTypeID {set;get;}
+        public long LegalTypeID {get; set;}
         public string Name { set; get; }
         public string Alias { set; get; }
         public string Description { set; get; }

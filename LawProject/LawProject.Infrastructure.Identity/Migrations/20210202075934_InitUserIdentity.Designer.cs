@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LawProject.Infrastructure.Identity.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20210126082817_InitIdenityDb")]
-    partial class InitIdenityDb
+    [Migration("20210202075934_InitUserIdentity")]
+    partial class InitUserIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

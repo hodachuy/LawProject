@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace LawProject.Infrastructure.Persistence.Repository
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<T>> GetPagedReponseAsync(int pageNumber, int pageSize)
+        public async Task<IEnumerable<T>> GetPagedReponseAsync(int pageNumber, int pageSize)
         {
             return await _dbContext
                 .Set<T>()
@@ -52,11 +53,97 @@ namespace LawProject.Infrastructure.Persistence.Repository
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync()
+        public async Task DeleteMulti(Expression<Func<T, bool>> where)
+        {
+            IEnumerable<T> objects = _dbContext.Set<T>().Where<T>(where).AsEnumerable();
+            foreach (T obj in objects)
+                _dbContext.Set<T>().Remove(obj);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbContext
                  .Set<T>()
                  .ToListAsync();
+        }
+
+        public async Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)
+        {
+            if (includes != null && includes.Count() > 0)
+            {
+                var query = _dbContext.Set<T>().Include(includes.First());
+                foreach (var include in includes.Skip(1))
+                    query = query.Include(include);
+                return await query.FirstOrDefaultAsync(expression);
+            }
+            return await _dbContext.Set<T>().FirstOrDefaultAsync(expression);
+        }
+
+        public virtual IEnumerable<T> GetAll(string[] includes = null)
+        {
+            //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
+            if (includes != null && includes.Count() > 0)
+            {
+                var query = _dbContext.Set<T>().Include(includes.First());
+                foreach (var include in includes.Skip(1))
+                    query = query.Include(include);
+                return query.AsQueryable();
+            }
+
+            return _dbContext.Set<T>().AsQueryable();
+        }
+
+        public async Task<int> Count(Expression<Func<T, bool>> where)
+        {
+            return await _dbContext.Set<T>().CountAsync(where);
+        }
+
+        public async Task<bool> CheckContains(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbContext.Set<T>().CountAsync<T>(predicate) > 0;
+        }
+
+        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where, string includes)
+        {
+            return _dbContext.Set<T>().Where(where).AsQueryable();
+        }
+
+        public virtual IEnumerable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null)
+        {
+            //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
+            if (includes != null && includes.Count() > 0)
+            {
+                var query = _dbContext.Set<T>().Include(includes.First());
+                foreach (var include in includes.Skip(1))
+                    query = query.Include(include);
+                return query.Where<T>(predicate).AsQueryable<T>();
+            }
+
+            return _dbContext.Set<T>().Where<T>(predicate).AsQueryable<T>();
+        }
+
+        public virtual IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)
+        {
+            int skipCount = index * size;
+            IQueryable<T> _resetSet;
+
+            //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
+            if (includes != null && includes.Count() > 0)
+            {
+                var query = _dbContext.Set<T>().Include(includes.First());
+                foreach (var include in includes.Skip(1))
+                    query = query.Include(include);
+                _resetSet = predicate != null ? query.Where<T>(predicate).AsQueryable() : query.AsQueryable();
+            }
+            else
+            {
+                _resetSet = predicate != null ? _dbContext.Set<T>().Where<T>(predicate).AsQueryable() : _dbContext.Set<T>().AsQueryable();
+            }
+
+            _resetSet = skipCount == 0 ? _resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);
+            total = _resetSet.Count();
+            return _resetSet.AsQueryable();
         }
     }
 }

@@ -5,6 +5,7 @@ using LawProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using LawProject.Application.Features.LegalDocuments.Commands.Create;
 
 namespace LawProject.Application.Mappings
 {
@@ -15,6 +16,8 @@ namespace LawProject.Application.Mappings
             CreateMap<Product, GetAllProductsViewModel>().ReverseMap();
             CreateMap<CreateProductCommand, Product>();
             CreateMap<GetAllProductsQuery, GetAllProductsParameter>();
+
+            CreateMap<CreateLegalCommand, LegalDocument>();
         }
     }
 }

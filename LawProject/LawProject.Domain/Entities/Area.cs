@@ -10,7 +10,7 @@ namespace LawProject.Domain.Entities
         public string Name { get; set; }
         public string Alias { get; set; }
         public string Description { get; set; }
-        public long PAreaID { get; set; }
+        public long? PAreaID { get; set; }
         public int SortOrder { get; set; }
 
     }

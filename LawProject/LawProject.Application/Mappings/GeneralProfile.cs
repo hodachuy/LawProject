@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using LawProject.Application.Features.LegalDocuments.Commands.Create;
+using LawProject.Application.Features.LegalDocuments.Queries.GetAll;
 
 namespace LawProject.Application.Mappings
 {
@@ -18,6 +19,8 @@ namespace LawProject.Application.Mappings
             CreateMap<GetAllProductsQuery, GetAllProductsParameter>();
 
             CreateMap<CreateLegalCommand, LegalDocument>();
+            CreateMap<GetAllLegalsQuery, GetAllLegalsParameter>();
+
         }
     }
 }

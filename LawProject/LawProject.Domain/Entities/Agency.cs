@@ -9,7 +9,7 @@ namespace LawProject.Domain.Entities
         public long AgencyID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public long PAgencyID { get; set; }
+        public long? PAgencyID { get; set; }
         public int SortOrder { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace LawProject.Application.Features.Products.Queries.GetAllProducts
 {
     public class GetAllProductsQuery : IRequest<PagedResponse<IEnumerable<GetAllProductsViewModel>>>
     {
+        public string Keyword { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
     }

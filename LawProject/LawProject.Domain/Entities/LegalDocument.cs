@@ -18,15 +18,15 @@ namespace LawProject.Domain.Entities
         public DateTime? PublishedDate { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public bool IsPublish { get; set; } // IsEffect
-        public int? DocTypeID { get; set; }
-        public int? AgencyID { get; set; }
-        public int? AreaID { get; set; }
+        public long? DocTypeID { get; set; }
+        public long? AgencyID { get; set; }
+        public long? AreaID { get; set; }
         public string LegalCode { get; set; }
         public string Notes { get; set; }
         public string SigningTitle { get; set; }
         public string SignerName { get; set; }
         public long ViewCount { get; set; }
-        public int? EditorID { get; set; }
+        public long? EditorID { get; set; }
         public long? LegalTypeID { get; set; } // TypeLegalID
         public long? LegalRefID { get; set; } // RefLegalID
         public string Content { get; set; } // TextHtml toàn văn
@@ -44,7 +44,7 @@ namespace LawProject.Domain.Entities
         public string FooterSigner { get; set; }
         public string FooterAppendix { get; set; } // FooterQuote
         public bool IsTraining { get; set; }
-        public bool IsHaveAppendix { get; set; }
+        public bool IsAppendix { get; set; } // IsHaveAppendix
 
     }
 }

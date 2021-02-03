@@ -20,8 +20,11 @@
     <ProjectReference Include="..\LawProject.Domain\LawProject.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\LegalDocuments\Commands\" />
-    <Folder Include="Features\LegalDocuments\Queries\" />
+    <Folder Include="Features\LegalDocuments\Commands\Create\" />
+    <Folder Include="Features\LegalDocuments\Commands\Delete\" />
+    <Folder Include="Features\LegalDocuments\Commands\Update\" />
+    <Folder Include="Features\LegalDocuments\Queries\GetById\" />
+    <Folder Include="Features\LegalDocuments\Queries\GetAll\" />
   </ItemGroup>
 
 </Project>

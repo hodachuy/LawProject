@@ -15,6 +15,10 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.HasKey(x => x.AnswerID);
             builder.Property(x => x.AnswerID).UseIdentityColumn();
             builder.Property(x => x.QuesID).IsRequired();
+
+            builder.HasOne<Question>(ad => ad.Question)
+                .WithOne(x => x.Answer)
+                .HasForeignKey<Answer>(ad => ad.QuesID);
         }
     }
 }

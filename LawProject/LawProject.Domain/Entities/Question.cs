@@ -1,5 +1,7 @@
 ﻿using LawProject.Domain.Common;
 using LawProject.Domain.Enum;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LawProject.Domain.Entities
 {
@@ -15,5 +17,7 @@ namespace LawProject.Domain.Entities
         public Status.QuestionAnswer StatusValue { get; set; } //Status
         public bool IsTraining { get; set; }// IsToAPI
         public long ViewCount { get; set; } // CountView
+        public virtual Answer Answer { get; set; }
+        public virtual IEnumerable<QuestionComment> QuestionComments { get; set; }
     }
 }

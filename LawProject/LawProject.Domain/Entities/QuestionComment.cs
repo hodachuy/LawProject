@@ -21,5 +21,6 @@ namespace LawProject.Domain.Entities
         public string LastModifiedBy { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public bool IsDelete { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

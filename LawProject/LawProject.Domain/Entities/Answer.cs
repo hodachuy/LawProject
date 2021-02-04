@@ -11,5 +11,6 @@ namespace LawProject.Domain.Entities
         public string AnswerContent { get; set; }
         public string AccountID { get; set; }
         public long QuesID { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

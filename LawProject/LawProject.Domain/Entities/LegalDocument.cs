@@ -31,7 +31,7 @@ namespace LawProject.Domain.Entities
         public long? LegalRefID { get; set; } // RefLegalID
         public string Content { get; set; } // TextHtml toàn văn
         public string TableOfContents { get; set; } // StructureHtml
-        public long? LegalGroupID { get; set; }
+        public long LegalGroupID { get; set; }
         public Status.Legal StatusValue { get; set; } //Status
         public string EnglishContent { get; set; } // ContentEnglish
         public string BookAuthor { get; set; }
@@ -44,7 +44,14 @@ namespace LawProject.Domain.Entities
         public string FooterSigner { get; set; }
         public string FooterAppendix { get; set; } // FooterQuote
         public bool IsTraining { get; set; }
-        public bool IsAppendix { get; set; } // IsHaveAppendix
-
+        public bool IsHasAppendix { get; set; } // IsHaveAppendix
+        public virtual LegalDocumentGroup LegalDocumentGroup { get; set; }
+        public virtual Area Area { get; set; }
+        public virtual DocumentsType DocumentsType { get; set; }
+        public virtual Editor Editor { get; set; }
+        public virtual Agency Agency { get; set; }
+        public virtual LegalDocumentType LegalDocumentType { get;set;}
+        public virtual District District { get; set; }
+        public virtual Province Province { get; set; }
     }
 }

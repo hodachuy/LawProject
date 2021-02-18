@@ -23,6 +23,10 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.ViewCount).HasDefaultValue(0);
             builder.Property(x => x.IsHasAppendix).HasDefaultValue(false);
             builder.Property(x => x.StatusValue).IsRequired();
+
+            builder.HasOne<LegalDocumentGroup>(ad => ad.LegalDocumentGroup)
+                .WithMany(x => x.LegalDocuments)
+                .HasForeignKey(ad => ad.LegalGroupID);
         }
     }
 }

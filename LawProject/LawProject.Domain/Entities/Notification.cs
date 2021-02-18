@@ -3,7 +3,7 @@ using System;
 
 namespace LawProject.Domain.Entities
 {
-    public class Notifiation
+    public class Notification
     {
 		public int ID { get; set; }
 		public string Message { get; set; }

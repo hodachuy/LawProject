@@ -14,5 +14,7 @@ namespace LawProject.Domain.Entities
 		public int SortOrder { get; set; }
 		public bool IsPublished { get; set; }
 		public bool IsDeleted { get; set; }
+		public virtual Province Province { get; set; }
+		public virtual IEnumerable<Ward> Wards { get; set; }
 	}
 }

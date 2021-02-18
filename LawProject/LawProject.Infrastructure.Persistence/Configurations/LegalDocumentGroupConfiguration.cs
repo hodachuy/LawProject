@@ -18,6 +18,10 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.Name).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Alias).IsRequired().HasMaxLength(250);
             builder.Property(x => x.SortOrder).HasDefaultValue(0);
+
+            builder.HasMany<LegalDocument>(ad => ad.LegalDocuments)
+                .WithOne(x => x.LegalDocumentGroup)
+                .HasForeignKey(ad => ad.LegalID);
         }
     }
 }

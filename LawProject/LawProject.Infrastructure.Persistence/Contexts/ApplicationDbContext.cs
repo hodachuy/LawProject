@@ -39,7 +39,7 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         public DbSet<LegalDocumentGroup> LegalDocumentGroups { get; set; }
         public DbSet<LegalDocumentRelate> LegalDocumentRelates { get; set; }
         public DbSet<LegalDocumentType> LegalDocumentTypes { get; set; }
-        public DbSet<Notifiation> Notifications { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         public DbSet<Page> Pages { get; set; }
         public DbSet<Part> Parts { get; set; }
         public DbSet<Province> Provinces { get; set; }

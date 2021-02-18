@@ -44,8 +44,10 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         public DbSet<Part> Parts { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<QuestionComment> QuestionComments { get; set; }
         public DbSet<QuestionTag> QuestionTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<UploadFile> UploadFiles { get; set; }
         public DbSet<Ward> Wards { get; set; }
 
 

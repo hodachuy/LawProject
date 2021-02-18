@@ -19,5 +19,6 @@ namespace LawProject.Domain.Entities
         public long ViewCount { get; set; } // CountView
         public virtual Answer Answer { get; set; }
         public virtual IEnumerable<QuestionComment> QuestionComments { get; set; }
+        public virtual IEnumerable<QuestionTag> QuestionTags { get; set; }
     }
 }

@@ -13,9 +13,9 @@ namespace LawProject.Infrastructure.Persistence.Configurations
         {
             builder.ToTable("Tags");
             builder.HasKey(x => x.ID);
-            builder.Property(x => x.ID).UseIdentityColumn();
-            builder.Property(x => x.ID).IsRequired();
-            builder.Property(x => x.Name).IsRequired().HasMaxLength(150);
+            builder.Property(x => x.ID).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.Type).IsRequired().HasMaxLength(100);
         }
     }
 }

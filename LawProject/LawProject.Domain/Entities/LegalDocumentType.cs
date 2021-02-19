@@ -12,5 +12,7 @@ namespace LawProject.Domain.Entities
         public string Name { set; get; }
         public string Alias { set; get; }
         public string Description { set; get; }
+        public virtual IEnumerable<LegalDocument> LegalDocuments { get; set; }
+
     }
 }

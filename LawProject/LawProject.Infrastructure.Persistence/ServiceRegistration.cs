@@ -31,6 +31,8 @@ namespace LawProject.Infrastructure.Persistence
             #region Repositories
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             services.AddTransient<IProductRepositoryAsync, ProductRepositoryAsync>();
+            services.AddTransient<ILegalGroupRepositoryAsync, LegalGroupRepositoryAsync>();
+            services.AddTransient<ILegalTypeRepositoryAsync, LegalTypeRepositoryAsync>();
             services.AddTransient<ILegalRepositoryAsync, LegalRepositoryAsync>();
 
             #endregion

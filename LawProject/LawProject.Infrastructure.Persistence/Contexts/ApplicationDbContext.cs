@@ -73,14 +73,42 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         {
             //Configure using Fluent API
             builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new ActivityConfiguration());
+            builder.ApplyConfiguration(new AgencyConfiguration());
+            builder.ApplyConfiguration(new AnswerConfiguration());
+            builder.ApplyConfiguration(new AreaConfiguration());
+            builder.ApplyConfiguration(new ArticleConfiguration());
+            builder.ApplyConfiguration(new ChapterConfiguration());
+            builder.ApplyConfiguration(new DistrictConfiguration());
+            builder.ApplyConfiguration(new DocumentsTypeConfiguration());
+            builder.ApplyConfiguration(new EditorConfiguration());
+            builder.ApplyConfiguration(new ItemConfiguration());
+            builder.ApplyConfiguration(new LawOfficeConfiguration());
+            builder.ApplyConfiguration(new LawyerConfiguration());
+            builder.ApplyConfiguration(new LegalDocumentConfiguration());
+            builder.ApplyConfiguration(new LegalDocumentGroupConfiguration());
+            builder.ApplyConfiguration(new LegalDocumentRelateConfiguration());
+            builder.ApplyConfiguration(new LegalDocumentTypeConfiguration());
+            builder.ApplyConfiguration(new NotificationConfiguration());
+            builder.ApplyConfiguration(new PageConfiguration());
+            builder.ApplyConfiguration(new PartConfiguration());
+            builder.ApplyConfiguration(new ProvinceConfiguration());
+            builder.ApplyConfiguration(new QuestionCommentConfiguration());
+            builder.ApplyConfiguration(new QuestionConfiguration());
+            builder.ApplyConfiguration(new QuestionTagConfiguration());
+            builder.ApplyConfiguration(new TagConfiguration());
+            builder.ApplyConfiguration(new UploadFileConfiguration());
+            builder.ApplyConfiguration(new WardConfiguration());
 
             //All Decimals will have 18,6 Range
-            foreach (var property in builder.Model.GetEntityTypes()
-            .SelectMany(t => t.GetProperties())
-            .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
-            {
-                property.SetColumnType("decimal(18,6)");
-            }
+
+            //foreach (var property in builder.Model.GetEntityTypes()
+            //.SelectMany(t => t.GetProperties())
+            //.Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
+            //{
+            //    property.SetColumnType("decimal(18,6)");
+            //}
+
             base.OnModelCreating(builder);
         }
     }

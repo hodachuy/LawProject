@@ -16,7 +16,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.ActivityID).UseIdentityColumn();
             builder.Property(x => x.Type).IsRequired().HasMaxLength(50);
             builder.Property(x => x.Data).IsRequired();
-            builder.Property(x => x.Timestamp).IsRequired().HasDefaultValueSql("getdate()");
+            builder.Property(x => x.Timestamp).IsRequired();
         }
     }
 }

@@ -1,4 +1,0 @@
-2021-02-01 13:26:53.026 +07:00 [INF] Starting up
-2021-02-01 13:27:04.333 +07:00 [WRN] Failed to determine the https port for redirect.
-2021-02-01 13:29:46.830 +07:00 [INF] Starting up
-2021-02-01 13:29:49.918 +07:00 [WRN] Failed to determine the https port for redirect.

@@ -18,7 +18,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
 
             builder.HasOne<Question>(ad => ad.Question)
                 .WithOne(x => x.Answer)
-                .HasForeignKey<Answer>(ad => ad.QuesID);
+                .HasForeignKey<Question>(ad => ad.QuesID);
         }
     }
 }

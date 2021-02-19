@@ -12,5 +12,7 @@ namespace LawProject.Domain.Entities
         public long? PDocID { get; set; }
         public long? LegalGroupID { get; set; }
         public int SortOrder { get; set; }
+        public virtual IEnumerable<LegalDocument> LegalDocuments { get; set; }
+
     }
 }

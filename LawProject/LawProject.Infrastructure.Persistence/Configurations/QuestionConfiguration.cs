@@ -33,6 +33,10 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.HasMany<QuestionTag>(ad => ad.QuestionTags)
                 .WithOne(x => x.Question)
                 .HasForeignKey(ad => ad.QuesID);
+
+            builder.HasOne<Area>(ad => ad.Area)
+                .WithMany(x => x.Questions)
+                .HasForeignKey(ad => ad.AreaID);
         }
     }
 }

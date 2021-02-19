@@ -27,6 +27,26 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.HasOne<LegalDocumentGroup>(ad => ad.LegalDocumentGroup)
                 .WithMany(x => x.LegalDocuments)
                 .HasForeignKey(ad => ad.LegalGroupID);
+
+            builder.HasOne<Area>(ad => ad.Area)
+                .WithMany(x => x.LegalDocuments)
+                .HasForeignKey(ad => ad.AreaID);
+
+            builder.HasOne<Editor>(ad => ad.Editor)
+                .WithMany(x => x.LegalDocuments)
+                .HasForeignKey(ad => ad.EditorID);
+
+            builder.HasOne<DocumentsType>(ad => ad.DocumentsType)
+                .WithMany(x => x.LegalDocuments)
+                .HasForeignKey(ad => ad.DocTypeID);
+
+            builder.HasOne<Agency>(ad => ad.Agency)
+                .WithMany(x => x.LegalDocuments)
+                .HasForeignKey(ad => ad.AgencyID);
+
+            builder.HasOne<LegalDocumentType>(ad => ad.LegalDocumentType)
+                .WithMany(x => x.LegalDocuments)
+                .HasForeignKey(ad => ad.LegalTypeID);
         }
     }
 }

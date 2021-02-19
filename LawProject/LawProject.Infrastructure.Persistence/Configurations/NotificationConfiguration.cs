@@ -18,7 +18,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.ID).IsRequired();
             builder.Property(x => x.Message).IsRequired();
             builder.Property(x => x.StatusValue).IsRequired().HasDefaultValue(Status.Notify.SHOW_NOT_READ);
-            builder.Property(x => x.CreatedDate).HasDefaultValueSql("getdate()");
+            builder.Property(x => x.CreatedDate).IsRequired();
         }
     }
 }

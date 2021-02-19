@@ -11,5 +11,7 @@ namespace LawProject.Domain.Entities
         public string Description { get; set; }
         public long? PAgencyID { get; set; }
         public int SortOrder { get; set; }
+        public virtual IEnumerable<LegalDocument> LegalDocuments { get; set; }
+
     }
 }

@@ -40,49 +40,49 @@ namespace LawProject.WebApi
             var host = CreateHostBuilder(args).Build();
 
             //#region Init default value
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-                try
-                {
-                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    try
-                    {
-                        //await Infrastructure.Identity.Seeds.DefaultRoles.SeedAsync(userManager, roleManager);
-                        //await Infrastructure.Identity.Seeds.DefaultSuperAdmin.SeedAsync(userManager, roleManager);
-                        //await Infrastructure.Identity.Seeds.DefaultBasicUser.SeedAsync(userManager, roleManager);
+            //using (var scope = host.Services.CreateScope())
+            //{
+            //    var services = scope.ServiceProvider;
+            //    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+            //    try
+            //    {
+            //        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+            //        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            //        try
+            //        {
+            //            await Infrastructure.Identity.Seeds.DefaultRoles.SeedAsync(userManager, roleManager);
+            //            await Infrastructure.Identity.Seeds.DefaultSuperAdmin.SeedAsync(userManager, roleManager);
+            //            await Infrastructure.Identity.Seeds.DefaultBasicUser.SeedAsync(userManager, roleManager);
 
-                        //var product = services.GetRequiredService<IProductRepositoryAsync>();
-                        //Infrastructure.Persistence.Seeds.DefaultProduct seedProduct = new DefaultProduct();
-                        //await seedProduct.SeedCreateProductDemo(product);
+            //            var product = services.GetRequiredService<IProductRepositoryAsync>();
+            //            Infrastructure.Persistence.Seeds.DefaultProduct seedProduct = new DefaultProduct();
+            //            await seedProduct.SeedCreateProductDemo(product);
 
-                        var legalGroup = services.GetRequiredService<ILegalGroupRepositoryAsync>();
-                        var seedLegalGroup = new DefaultLegalDocumentGroup();
-                        await seedLegalGroup.CreateLegalGroup(legalGroup);
+            //            var legalGroup = services.GetRequiredService<ILegalGroupRepositoryAsync>();
+            //            var seedLegalGroup = new DefaultLegalDocumentGroup();
+            //            await seedLegalGroup.CreateLegalGroup(legalGroup);
 
-                        var legalType = services.GetRequiredService<ILegalTypeRepositoryAsync>();
-                        var seedLegalType = new DefaultLegalDocumentType();
-                        await seedLegalType.CreateLegalType(legalType);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error(ex.Message);
-                    }
+            //            var legalType = services.GetRequiredService<ILegalTypeRepositoryAsync>();
+            //            var seedLegalType = new DefaultLegalDocumentType();
+            //            await seedLegalType.CreateLegalType(legalType);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            Log.Error(ex.Message);
+            //        }
 
-                    Log.Information("Finished Seeding Default Data");
-                    Log.Information("Application Starting");
-                }
-                catch (Exception ex)
-                {
-                    Log.Warning(ex, "An error occurred seeding the DB");
-                }
-                finally
-                {
-                    Log.CloseAndFlush();
-                }
-            }
+            //        Log.Information("Finished Seeding Default Data");
+            //        Log.Information("Application Starting");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Log.Warning(ex, "An error occurred seeding the DB");
+            //    }
+            //    finally
+            //    {
+            //        Log.CloseAndFlush();
+            //    }
+            //}
             //#endregion
 
             host.Run();

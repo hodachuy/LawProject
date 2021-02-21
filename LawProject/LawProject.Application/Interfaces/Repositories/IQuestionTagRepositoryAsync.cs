@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LawProject.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LawProject.Application.Interfaces.Repositories
 {
-    class IQuestionTagRepositoryAsync
+    public interface IQuestionTagRepositoryAsync : IGenericRepositoryAsync<QuestionTag>
     {
     }
 }

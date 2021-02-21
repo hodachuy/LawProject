@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LawProject.Application.Interfaces.Repositories
 {
-    public interface IQuestionRepositoryAsync : IGenericRepositoryAsync<Question>
+    public interface IPageRepositoryAsync : IGenericRepositoryAsync<Page>
     {
     }
 }

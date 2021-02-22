@@ -16,6 +16,9 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.ItemID).UseIdentityColumn();
             builder.Property(x => x.ItemID).IsRequired();
             builder.Property(x => x.Idx).HasDefaultValue(0);
+            builder.HasOne<Chapter>(ad => ad.Chapter)
+                .WithMany(x => x.Items)
+                .HasForeignKey(ad => ad.ChapID);
         }
     }
 }

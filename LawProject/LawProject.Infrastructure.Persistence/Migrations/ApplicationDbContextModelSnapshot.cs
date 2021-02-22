@@ -182,6 +182,8 @@ namespace LawProject.Infrastructure.Persistence.Migrations
 
                     b.HasKey("ArticleID");
 
+                    b.HasIndex("ItemID");
+
                     b.ToTable("Articles");
                 });
 
@@ -214,6 +216,8 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("ChapID");
+
+                    b.HasIndex("PartID");
 
                     b.ToTable("Chapters");
                 });
@@ -345,6 +349,8 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("ItemID");
+
+                    b.HasIndex("ChapID");
 
                     b.ToTable("Items");
                 });
@@ -886,7 +892,149 @@ namespace LawProject.Infrastructure.Persistence.Migrations
 
                     b.HasKey("PartID");
 
+                    b.HasIndex("LegalID");
+
                     b.ToTable("Parts");
+                });
+
+            modelBuilder.Entity("LawProject.Domain.Entities.Post", b =>
+                {
+                    b.Property<int>("PostID")
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Alias")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(350);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("character varying(550)")
+                        .HasMaxLength(550);
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDelete")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsPublish")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MetaKeyword")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("character varying(350)")
+                        .HasMaxLength(350);
+
+                    b.Property<int>("PostCategoryID")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ViewCount")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("PostID");
+
+                    b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("LawProject.Domain.Entities.PostCategory", b =>
+                {
+                    b.Property<int>("PostCategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Alias")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("character varying(550)")
+                        .HasMaxLength(550);
+
+                    b.Property<int?>("DisplayOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDelete")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MetaKeyword")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("character varying(250)")
+                        .HasMaxLength(250);
+
+                    b.Property<int?>("ParentID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("PostCategoryID");
+
+                    b.ToTable("PostCategories");
+                });
+
+            modelBuilder.Entity("LawProject.Domain.Entities.PostTag", b =>
+                {
+                    b.Property<int>("PostID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TagID")
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("PostID", "TagID");
+
+                    b.HasIndex("TagID");
+
+                    b.ToTable("PostTags");
                 });
 
             modelBuilder.Entity("LawProject.Domain.Entities.Product", b =>
@@ -1240,11 +1388,38 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("LawProject.Domain.Entities.Article", b =>
+                {
+                    b.HasOne("LawProject.Domain.Entities.Item", "Item")
+                        .WithMany("Articles")
+                        .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LawProject.Domain.Entities.Chapter", b =>
+                {
+                    b.HasOne("LawProject.Domain.Entities.Part", "Part")
+                        .WithMany("Chapters")
+                        .HasForeignKey("PartID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("LawProject.Domain.Entities.District", b =>
                 {
                     b.HasOne("LawProject.Domain.Entities.Province", "Province")
                         .WithMany("Districts")
                         .HasForeignKey("ProvinceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LawProject.Domain.Entities.Item", b =>
+                {
+                    b.HasOne("LawProject.Domain.Entities.Chapter", "Chapter")
+                        .WithMany("Items")
+                        .HasForeignKey("ChapID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1286,6 +1461,39 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                         .HasForeignKey("ProvinceID");
                 });
 
+            modelBuilder.Entity("LawProject.Domain.Entities.Part", b =>
+                {
+                    b.HasOne("LawProject.Domain.Entities.LegalDocument", "LegalDocument")
+                        .WithMany("Parts")
+                        .HasForeignKey("LegalID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LawProject.Domain.Entities.Post", b =>
+                {
+                    b.HasOne("LawProject.Domain.Entities.PostCategory", "PostCategory")
+                        .WithMany("Posts")
+                        .HasForeignKey("PostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LawProject.Domain.Entities.PostTag", b =>
+                {
+                    b.HasOne("LawProject.Domain.Entities.Post", "Post")
+                        .WithMany("PostTags")
+                        .HasForeignKey("PostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LawProject.Domain.Entities.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("LawProject.Domain.Entities.Question", b =>
                 {
                     b.HasOne("LawProject.Domain.Entities.Area", "Area")
@@ -1311,7 +1519,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("LawProject.Domain.Entities.Tag", "Tag")
-                        .WithMany("QuestionTags")
+                        .WithMany()
                         .HasForeignKey("TagID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

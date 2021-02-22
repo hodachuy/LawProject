@@ -12,5 +12,8 @@ namespace LawProject.Domain.Entities
         public int Idx { get; set; }
         public bool IsDelete { get; set; }
         public long LegalID { get; set; }
+        public virtual LegalDocument LegalDocument { get; set; }
+        public virtual IEnumerable<Chapter> Chapters { get; set; }
+
     }
 }

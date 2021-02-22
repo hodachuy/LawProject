@@ -24,7 +24,7 @@ namespace LawProject.WebApi
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplicationLayer();
+            services.AddApplicationLayer(_config);
             services.AddIdentityInfrastructure(_config);
             services.AddPersistenceInfrastructure(_config);
             services.AddSharedInfrastructure(_config);

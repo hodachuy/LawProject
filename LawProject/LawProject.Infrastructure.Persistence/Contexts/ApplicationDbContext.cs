@@ -49,6 +49,9 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         public DbSet<Tag> Tags { get; set; }
         public DbSet<UploadFile> UploadFiles { get; set; }
         public DbSet<Ward> Wards { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<PostCategory> PostCategories { get; set; }
+        public DbSet<PostTag> PostTags { get;set; }
 
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -99,7 +102,9 @@ namespace LawProject.Infrastructure.Persistence.Contexts
             builder.ApplyConfiguration(new TagConfiguration());
             builder.ApplyConfiguration(new UploadFileConfiguration());
             builder.ApplyConfiguration(new WardConfiguration());
-
+            builder.ApplyConfiguration(new PostConfiguration());
+            builder.ApplyConfiguration(new PostTagConfiguration());
+            builder.ApplyConfiguration(new PostCategoryConfiguration());
             //All Decimals will have 18,6 Range
 
             //foreach (var property in builder.Model.GetEntityTypes()

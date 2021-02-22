@@ -13,5 +13,7 @@ namespace LawProject.Domain.Entities
         public int Idx { get; set; }
         public bool IsDelete { get; set; }
         public long LegalID { get; set; }
+        public virtual Part Part { get; set; }
+        public virtual IEnumerable<Item> Items { get; set; }
     }
 }

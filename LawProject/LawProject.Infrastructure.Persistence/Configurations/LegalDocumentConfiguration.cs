@@ -47,6 +47,10 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.HasOne<LegalDocumentType>(ad => ad.LegalDocumentType)
                 .WithMany(x => x.LegalDocuments)
                 .HasForeignKey(ad => ad.LegalTypeID);
+
+            builder.HasMany<Part>(ad => ad.Parts)
+                .WithOne(x => x.LegalDocument)
+                .HasForeignKey(ad => ad.PartID);
         }
     }
 }

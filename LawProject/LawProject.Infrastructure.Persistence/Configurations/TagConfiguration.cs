@@ -16,10 +16,6 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.ID).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Type).IsRequired().HasMaxLength(100);
-
-            builder.HasMany<QuestionTag>(ad => ad.QuestionTags)
-                .WithOne(x => x.Tag)
-                .HasForeignKey(ad => ad.TagID);
         }
     }
 }

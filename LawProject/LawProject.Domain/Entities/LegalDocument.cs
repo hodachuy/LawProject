@@ -53,5 +53,6 @@ namespace LawProject.Domain.Entities
         public virtual LegalDocumentType LegalDocumentType { get;set;}
         public virtual District District { get; set; }
         public virtual Province Province { get; set; }
+        public virtual IEnumerable<Part> Parts { get; set; }
     }
 }

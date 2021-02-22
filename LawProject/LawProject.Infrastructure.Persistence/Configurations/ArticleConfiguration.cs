@@ -18,6 +18,9 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.LegalID).IsRequired();
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.Idx).HasDefaultValue(0);
+            builder.HasOne<Item>(ad => ad.Item)
+                .WithMany(x => x.Articles)
+                .HasForeignKey(ad => ad.ItemID);
         }
     }
 }

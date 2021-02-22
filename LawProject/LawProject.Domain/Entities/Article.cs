@@ -14,5 +14,6 @@ namespace LawProject.Domain.Entities
         public bool IsDelete { get; set; }
         public long LegalID { get; set; }
         public string DocAttach { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

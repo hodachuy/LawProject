@@ -9,7 +9,5 @@ namespace LawProject.Domain.Entities
         public string ID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
-        public virtual IEnumerable<QuestionTag> QuestionTags { get; set; }
-
     }
 }

@@ -3,6 +3,7 @@ using LawProject.Application.Features.Products.Commands.DeleteProductById;
 using LawProject.Application.Features.Products.Commands.UpdateProduct;
 using LawProject.Application.Features.Products.Queries.GetAllProducts;
 using LawProject.Application.Features.Products.Queries.GetProductById;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -31,14 +32,14 @@ namespace LawProject.WebApi.Controllers.v1
         }
 
         [HttpPost]
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Post(CreateProductCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         [HttpPut("{id}")]
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Put(int id, UpdateProductCommand command)
         {
             if (id != command.Id)

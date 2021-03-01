@@ -16,6 +16,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
+      "sqlDebugging": true,
       "ancmHostingModel": "OutOfProcess"
     },
     "LawProject.WebApi": {

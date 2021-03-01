@@ -23,7 +23,7 @@ namespace LawProject.Application.Features.Products.Queries.GetProductById
             }
             public async Task<Response<Product>> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
             {
-                var product = await _productRepository.GetByIdAsync(query.Id);
+                var product = await _productRepository.GetSingleByCondition(x=>x.Id == query.Id);
                 if (product == null) throw new ApiException($"Product Not Found.");
                 return new Response<Product>(product);
             }

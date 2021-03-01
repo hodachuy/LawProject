@@ -12,7 +12,7 @@ namespace LawProject.Application.Features.Products.Commands.UpdateProduct
 {
     public class UpdateProductCommand : IRequest<Response<long>>
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Rate { get; set; }
@@ -25,7 +25,7 @@ namespace LawProject.Application.Features.Products.Commands.UpdateProduct
             }
             public async Task<Response<long>> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
             {
-                var product = await _productRepository.GetByIdAsync(command.Id);
+                var product = await _productRepository.GetSingleByCondition(x=>x.Id == command.Id);
 
                 if (product == null)
                 {

@@ -43,7 +43,7 @@ namespace LawProject.Infrastructure.Persistence.Repository
 
         public async Task UpdateAsync(T entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.Attach(entity).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
 
@@ -65,6 +65,7 @@ namespace LawProject.Infrastructure.Persistence.Repository
         {
             return await _dbContext
                  .Set<T>()
+                 .AsNoTracking()
                  .ToListAsync();
         }
 
@@ -72,12 +73,13 @@ namespace LawProject.Infrastructure.Persistence.Repository
         {
             if (includes != null && includes.Count() > 0)
             {
-                var query = _dbContext.Set<T>().Include(includes.First());
-                foreach (var include in includes.Skip(1))
-                    query = query.Include(include);
+                var query = _dbContext.Set<T>().AsNoTracking();
+                foreach (var include in includes)
+                    query = query.Include(include).AsTracking();
                 return await query.FirstOrDefaultAsync(expression);
             }
-            return await _dbContext.Set<T>().FirstOrDefaultAsync(expression);
+
+            return await _dbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(expression);
         }
 
         public virtual IEnumerable<T> GetAll(string[] includes = null)
@@ -85,13 +87,13 @@ namespace LawProject.Infrastructure.Persistence.Repository
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
             if (includes != null && includes.Count() > 0)
             {
-                var query = _dbContext.Set<T>().Include(includes.First());
-                foreach (var include in includes.Skip(1))
-                    query = query.Include(include);
+                var query = _dbContext.Set<T>().AsNoTracking();
+                foreach (var include in includes)
+                    query = query.Include(include).AsTracking(); ;
                 return query.AsQueryable();
             }
 
-            return _dbContext.Set<T>().AsQueryable();
+            return _dbContext.Set<T>().AsNoTracking().AsQueryable();
         }
 
         public async Task<int> Count(Expression<Func<T, bool>> where)
@@ -106,7 +108,7 @@ namespace LawProject.Infrastructure.Persistence.Repository
 
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where, string includes)
         {
-            return _dbContext.Set<T>().Where(where).AsQueryable();
+            return _dbContext.Set<T>().AsNoTracking().Where(where).AsTracking().AsQueryable();
         }
 
         public virtual IEnumerable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null)
@@ -114,13 +116,13 @@ namespace LawProject.Infrastructure.Persistence.Repository
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
             if (includes != null && includes.Count() > 0)
             {
-                var query = _dbContext.Set<T>().Include(includes.First());
-                foreach (var include in includes.Skip(1))
-                    query = query.Include(include);
-                return query.Where<T>(predicate).AsQueryable<T>();
+                var query = _dbContext.Set<T>().AsNoTracking();
+                foreach (var include in includes)
+                    query = query.Include(include).AsTracking();
+                return query.Where<T>(predicate).AsTracking().AsQueryable<T>();
             }
 
-            return _dbContext.Set<T>().Where<T>(predicate).AsQueryable<T>();
+            return _dbContext.Set<T>().AsNoTracking().Where<T>(predicate).AsTracking().AsQueryable<T>();
         }
 
         public virtual IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)
@@ -131,14 +133,14 @@ namespace LawProject.Infrastructure.Persistence.Repository
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
             if (includes != null && includes.Count() > 0)
             {
-                var query = _dbContext.Set<T>().Include(includes.First());
-                foreach (var include in includes.Skip(1))
-                    query = query.Include(include);
-                _resetSet = predicate != null ? query.Where<T>(predicate).AsQueryable() : query.AsQueryable();
+                var query = _dbContext.Set<T>().AsNoTracking();
+                foreach (var include in includes)
+                    query = query.Include(include).AsTracking();
+                _resetSet = predicate != null ? query.Where<T>(predicate).AsTracking().AsQueryable() : query.AsQueryable();
             }
             else
             {
-                _resetSet = predicate != null ? _dbContext.Set<T>().Where<T>(predicate).AsQueryable() : _dbContext.Set<T>().AsQueryable();
+                _resetSet = predicate != null ? _dbContext.Set<T>().AsNoTracking().Where<T>(predicate).AsTracking().AsQueryable() : _dbContext.Set<T>().AsNoTracking().AsQueryable();
             }
 
             _resetSet = skipCount == 0 ? _resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);

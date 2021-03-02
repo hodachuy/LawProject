@@ -12,6 +12,9 @@ using LawProject.WebApi.Extensions;
 using LawProject.WebApi.Services;
 using Serilog;
 using Serilog.Events;
+using LawProject.Infrastructure.Persistence.Contexts;
+using Microsoft.EntityFrameworkCore;
+using LawProject.Infrastructure.Identity.Contexts;
 
 namespace LawProject.WebApi
 {
@@ -35,11 +38,14 @@ namespace LawProject.WebApi
             services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                // migrate database changes on startup (includes initial db creation)
+                //InitializeDatabase(app);
             }
             else
             {
@@ -51,6 +57,14 @@ namespace LawProject.WebApi
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwaggerExtension();
+
+            // global cors policy
+            app.UseCors(x => x
+                .SetIsOriginAllowed(origin => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
             app.UseErrorHandlingMiddleware();
             app.UseHealthChecks("/health");
 
@@ -58,6 +72,19 @@ namespace LawProject.WebApi
              {
                  endpoints.MapControllers();
              });
+        }
+
+        /// <summary>
+        /// Make DB update to latest migration
+        /// </summary>
+        /// <param name="app"></param>
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
+                scope.ServiceProvider.GetRequiredService<IdentityContext>().Database.Migrate();
+            }
         }
     }
 }

@@ -125,9 +125,9 @@ namespace LawProject.Infrastructure.Persistence.Repository
             return _dbContext.Set<T>().AsNoTracking().Where<T>(predicate).AsTracking().AsQueryable<T>();
         }
 
-        public virtual IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)
+        public virtual IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 1, int size = 20, string[] includes = null)
         {
-            int skipCount = index * size;
+            int skipCount = (index - 1) * size;
             IQueryable<T> _resetSet;
 
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE

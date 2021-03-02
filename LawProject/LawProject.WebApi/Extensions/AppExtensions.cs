@@ -14,7 +14,7 @@ namespace LawProject.WebApi.Extensions
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CleanArchitecture.LawProject.WebApi");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "LawProject.WebApi");
             });
         }
         public static void UseErrorHandlingMiddleware(this IApplicationBuilder app)

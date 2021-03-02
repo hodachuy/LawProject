@@ -1,6 +1,7 @@
 ﻿using LawProject.Application.Exceptions;
 using LawProject.Application.Wrappers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;

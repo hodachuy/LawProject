@@ -4,5 +4,11 @@
         <name>LawProject.WebApi</name>
     </assembly>
     <members>
+        <member name="M:LawProject.WebApi.Startup.InitializeDatabase(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Make DB update to latest migration
+            </summary>
+            <param name="app"></param>
+        </member>
     </members>
 </doc>

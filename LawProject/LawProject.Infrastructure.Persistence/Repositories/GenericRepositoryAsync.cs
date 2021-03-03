@@ -68,16 +68,22 @@ namespace LawProject.Infrastructure.Persistence.Repository
                  .AsNoTracking()
                  .ToListAsync();
         }
-
-        public async Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)
+        public async Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null, Expression<Func<T, T>> columns = null)
         {
             if (includes != null && includes.Count() > 0)
             {
                 var query = _dbContext.Set<T>().AsNoTracking();
                 foreach (var include in includes)
                     query = query.Include(include).AsTracking();
+
+                if(columns != null)
+                    return await query.Where(expression).Select(columns).FirstOrDefaultAsync();
+
                 return await query.FirstOrDefaultAsync(expression);
             }
+
+            if (columns != null)
+                return await _dbContext.Set<T>().AsNoTracking().Where(expression).Select(columns).FirstOrDefaultAsync();
 
             return await _dbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(expression);
         }
@@ -146,6 +152,36 @@ namespace LawProject.Infrastructure.Persistence.Repository
             _resetSet = skipCount == 0 ? _resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);
             total = _resetSet.Count();
             return _resetSet.AsQueryable();
+        }
+
+
+        public virtual void Save()
+        {
+            _dbContext.SaveChanges();
+        }
+
+        public async virtual Task<int> SaveAsync()
+        {
+            return await _dbContext.SaveChangesAsync();
+        }
+
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _dbContext.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace LawProject.Application.Interfaces
 {
     public interface IGenericRepositoryAsync<T> where T : class
     {
-        Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null);
+        Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null, Expression<Func<T, T>> columns = null);
         Task<T> GetByIdAsync(long id);
         Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> GetAll(string[] includes = null);
@@ -22,5 +22,8 @@ namespace LawProject.Application.Interfaces
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where, string includes);
         IEnumerable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null);
         IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null);
+        void Dispose();
+        void Save();
+        Task<int> SaveAsync();
     }
 }

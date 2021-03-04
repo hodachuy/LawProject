@@ -21,5 +21,9 @@ namespace LawProject.WebApi.Extensions
         {
             app.UseMiddleware<ErrorHandlerMiddleware>();
         }
+        public static void UseRequestCultureMiddleware(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<RequestCultureMiddleware>();
+        }
     }
 }

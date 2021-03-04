@@ -8,30 +8,44 @@ namespace LawProject.Domain.Enum
     {
         /// <summary>
         /// Question status
+        /// 1.NoAnswer - chưa trả lời
+        /// 2.TransferAdministrativeDivision - chuyển đơn vị hành chính
+        /// 3.PendingPublish - chờ xuất bản
+        /// 4.Published - đã xuất bản
+        /// 5.TransferExpert - chuyển tới chuyên gia
+        /// 6.TransferAdmin - chuyển tới quản trị viên
+        /// 7.PendingEdit - chờ chỉnh sửa
+        /// 8.Edited - đã chỉnh sửa
+        /// 9.CancelAnswer - hủy không trả lời
+        /// 10.TransferLawyer - chuyển tới luật sư
         /// </summary>
         public enum QuestionAnswer
         {
-            NoAnswer = 1, // chưa trả lời
-            TransferAdministrativeDivision = 2, //chuyển đơn vị hành chính
+            NoAnswer = 1,
+            TransferAdministrativeDivision = 2,
             PendingPublish = 3,
             Published = 4,
-            TransferExpert = 5, // chuyển chuyên gia
+            TransferExpert = 5,
             TransferAdmin = 6,
             PendingEdit = 7,
             Edited = 8,
-            CancelAnswer = 9, // hủy trả lời
-            TransferLawyer = 10, // chuyển luật sư
+            CancelAnswer = 9,
+            TransferLawyer = 10,
         }
 
         /// <summary>
         /// Notify status
+        /// 1.SHOW_NOT_READ - Hiển thị chưa xem
+        /// 2.HIDDEN_NOT_READ - Ẩn chưa xem
+        /// 3.SHOW_READED - Hiển thị đã xem
+        /// 4.HIDDEN_READED - Ẩn đã xem
         /// </summary>
         public enum Notify
         {
-            SHOW_NOT_READ,
-            HIDDEN_NOT_READ,
-            SHOW_READED,
-            HIDDEN_READED
+            SHOW_NOT_READ = 1,
+            HIDDEN_NOT_READ = 2,
+            SHOW_READED = 3,
+            HIDDEN_READED = 4
         }
 
         /// <summary>

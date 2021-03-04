@@ -15,6 +15,8 @@ using Serilog.Events;
 using LawProject.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using LawProject.Infrastructure.Identity.Contexts;
+using Microsoft.AspNetCore.Http;
+using System.Globalization;
 
 namespace LawProject.WebApi
 {
@@ -66,6 +68,12 @@ namespace LawProject.WebApi
                 .AllowCredentials());
 
             app.UseErrorHandlingMiddleware();
+            //app.UseRequestCultureMiddleware();
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync($"Hello{CultureInfo.CurrentCulture.DisplayName}");
+            //});
+
             app.UseHealthChecks("/health");
 
             app.UseEndpoints(endpoints =>

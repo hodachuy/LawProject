@@ -53,8 +53,23 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         public DbSet<PostCategory> PostCategories { get; set; }
         public DbSet<PostTag> PostTags { get;set; }
 
+        public virtual void Save()
+        {
+            base.SaveChanges();
+        }
+        public override int SaveChanges()
+        {
+            TrackChanges();
+            return base.SaveChanges();
+        }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            TrackChanges();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void TrackChanges()
         {
             foreach (var entry in ChangeTracker.Entries<AuditableBaseEntity>())
             {
@@ -70,7 +85,6 @@ namespace LawProject.Infrastructure.Persistence.Contexts
                         break;
                 }
             }
-            return base.SaveChangesAsync(cancellationToken);
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

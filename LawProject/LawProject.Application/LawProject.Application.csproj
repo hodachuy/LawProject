@@ -25,7 +25,6 @@
     <Folder Include="Features\LegalDocuments\Commands\Delete\" />
     <Folder Include="Features\LegalDocuments\Commands\Update\" />
     <Folder Include="Features\LegalDocuments\Queries\GetById\" />
-    <Folder Include="Features\Question\" />
   </ItemGroup>
 
 </Project>

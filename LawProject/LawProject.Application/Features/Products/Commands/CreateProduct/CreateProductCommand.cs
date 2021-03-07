@@ -15,16 +15,7 @@ namespace LawProject.Application.Features.Products.Commands.CreateProduct
         public string Description { get; set; }
         public decimal Rate { get; set; }
     }
-    // demo
-    public partial class PublishProductCommand : IRequest<Response<long>>
-    {
-        public string Name { get; set; }
-        public string Barcode { get; set; }
-        public string Description { get; set; }
-        public decimal Rate { get; set; }
-    }
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Response<long>>,
-                                               IRequestHandler<PublishProductCommand, Response<long>>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Response<long>>
     {
         private readonly IProductRepositoryAsync _productRepository;
 
@@ -40,11 +31,6 @@ namespace LawProject.Application.Features.Products.Commands.CreateProduct
             var product = _mapper.Map<Product>(request);
             await _productRepository.AddAsync(product);
             return new Response<long>(product.Id);
-        }
-
-        public Task<Response<long>> Handle(PublishProductCommand request, CancellationToken cancellationToken)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

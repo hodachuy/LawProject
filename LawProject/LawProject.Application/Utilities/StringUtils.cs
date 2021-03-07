@@ -287,7 +287,7 @@ namespace LawProject.Application.Utilities
             }
             return new string(buffer);
         }
-
+    
         /// <summary>
         /// Returns the number of occurances of one string within another
         /// </summary>

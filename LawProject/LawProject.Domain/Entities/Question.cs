@@ -8,7 +8,7 @@ namespace LawProject.Domain.Entities
     public class Question : AuditableBaseEntity
     {
         public long QuesID { get; set; }
-        public string QuesCode { get; set; }
+        public string QuesCode { get; set; } //QuesID + CreatedDate
         public string QuesContent { get; set; }// Contents
         public string Title { get; set; }
         public string AccountID { get; set; }

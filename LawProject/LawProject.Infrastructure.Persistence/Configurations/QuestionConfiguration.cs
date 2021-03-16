@@ -20,6 +20,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.QuesCode).IsRequired();
             builder.Property(x => x.QuesContent).IsRequired();
             builder.Property(x => x.ViewCount).HasDefaultValue(0);
+            builder.Property(x => x.IsTraining).HasDefaultValue(false);
             builder.Property(x => x.StatusValue).HasDefaultValue(Status.QuestionAnswer.NoAnswer);
 
             builder.HasOne<Answer>(ad => ad.Answer)

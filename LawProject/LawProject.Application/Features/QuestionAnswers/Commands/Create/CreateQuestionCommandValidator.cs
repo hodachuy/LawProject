@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LawProject.Application.Features.Questions.Commands.CreateQuestion
+namespace LawProject.Application.Features.QuestionAnswers.Commands.Create
 {
-    public class CreateQuestionCommandValidator : AbstractValidator<CreateQuestionCommand>
+    public class CreateQuestionCommandValidator : AbstractValidator<CreateQuestionAnswerFrAdminCommand>
     {
         private readonly IQuestionRepositoryAsync questionRepository;
 
@@ -16,28 +16,18 @@ namespace LawProject.Application.Features.Questions.Commands.CreateQuestion
         {
             this.questionRepository = questionRepository;
 
-            RuleFor(q => q.QuesCode)
-                .NotEmpty().WithMessage("{PropertyName} is required.")
-                .NotNull()
-                .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50 characters.")
-                .MustAsync(IsUniqueQuestioncode).WithMessage("{PropertyName} already exists.");
-
             RuleFor(q => q.QuesContent)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
 
             RuleFor(q => q.QuesCode)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
-                .NotNull();
+                .NotNull()
+                .MustAsync(IsUniqueQuestioncode).WithMessage("{PropertyName} already exists.");
 
-            RuleFor(q => q.StatusValue)
-                .NotEmpty().WithMessage("{PropertyName} is required.")
-                .NotNull();
-
-            RuleFor(q => q.AccountID)
-                .NotEmpty().WithMessage("{PropertyName} is required.")
-                .NotNull();
-
+            RuleFor(q => q.QuesContentText)
+                .NotEmpty().WithMessage("{PropertyName} is required")
+                .NotNull();        
         }
 
         private async Task<bool> IsUniqueQuestioncode(string questionCode, CancellationToken cancellationToken)

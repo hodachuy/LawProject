@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawProject.Application.Features.Questions.Queries.GetAllQuestions
+namespace LawProject.Application.Features.QuestionAnswers.Queries.GetAllQuestions
 {
     class GetAllQuestionsViewModel
     {

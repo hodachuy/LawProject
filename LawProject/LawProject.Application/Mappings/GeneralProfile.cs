@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using LawProject.Application.Features.LegalDocuments.Commands.Create;
 using LawProject.Application.Features.LegalDocuments.Queries.GetAll;
-using LawProject.Application.Features.Question.Commands.CreateQuestion;
+using LawProject.Application.Features.QuestionAnswers.Commands.Create;
 
 namespace LawProject.Application.Mappings
 {
@@ -23,7 +23,7 @@ namespace LawProject.Application.Mappings
             CreateMap<GetAllLegalsQuery, GetAllLegalsParameter>();
 
 
-            CreateMap<CreateQuestionCommand, Question>();
+            CreateMap<CreateQuestionAnswerFrAdminCommand, Question>();
 
 
         }

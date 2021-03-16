@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawProject.Application.Features.Questions.Commands.UpdateQuestion
+namespace LawProject.Application.Features.QuestionAnswers.Commands.Update
 {
     class UpdateQuestionCommand
     {

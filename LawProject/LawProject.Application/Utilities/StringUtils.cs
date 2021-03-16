@@ -25,6 +25,12 @@ namespace LawProject.Application.Utilities
             return string.IsNullOrWhiteSpace(theInput);
         }
 
+        public static bool IsNullEmptyOrWhiteSpace(this string theInput)
+        {
+            return (String.IsNullOrEmpty(theInput) ||
+                         theInput.Trim().Length == 0) ? true : false;
+        }
+
         /// <summary>
         /// Converts the string to Int32
         /// </summary>

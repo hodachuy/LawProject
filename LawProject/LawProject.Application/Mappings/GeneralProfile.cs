@@ -23,7 +23,7 @@ namespace LawProject.Application.Mappings
             CreateMap<GetAllLegalsQuery, GetAllLegalsParameter>();
 
 
-            CreateMap<CreateQuestionAnswerFrAdminCommand, Question>();
+            CreateMap<CreateQuestionAnswerCommand, Question>();
 
 
         }

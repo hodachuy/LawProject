@@ -10,7 +10,7 @@ using LawProject.Application.Utilities;
 
 namespace LawProject.Application.Features.QuestionAnswers.Commands.Create
 {
-    public partial class CreateQuestionAnswerFrAdminCommand : IRequest<Response<Question>>
+    public partial class CreateQuestionAnswerCommand : IRequest<Response<Question>>
     {
         public string QuesCode { get; set; }
         public string QuesContent { get; set; }
@@ -24,13 +24,14 @@ namespace LawProject.Application.Features.QuestionAnswers.Commands.Create
         public long ViewCount { get; set; }
     }
 
-    public partial class CreateQuestionFrClientCommand : IRequest<Response<long>>
+    public partial class CreateQuestionCommand : IRequest<Response<long>>
     {
         public string QuesContent { get; set; }
+        public string AccountID { get; set; }
     }
 
-    public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionAnswerFrAdminCommand, Response<Question>>,
-                                                IRequestHandler<CreateQuestionFrClientCommand, Response<long>>
+    public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionAnswerCommand, Response<Question>>,
+                                                IRequestHandler<CreateQuestionCommand, Response<long>>
     {
         private readonly IQuestionRepositoryAsync _questionRepository;
         private readonly IAnswerRepositoryAsync _answerRepository;
@@ -44,7 +45,7 @@ namespace LawProject.Application.Features.QuestionAnswers.Commands.Create
             _answerRepository = answerRepository;
         }
 
-        public async Task<Response<Question>> Handle(CreateQuestionAnswerFrAdminCommand request, CancellationToken cancellationToken)
+        public async Task<Response<Question>> Handle(CreateQuestionAnswerCommand request, CancellationToken cancellationToken)
         {
             var question = _mapper.Map<Question>(request);
             question.QuesContent = StringUtils.GetSafeHtml(request.QuesContent);
@@ -68,7 +69,7 @@ namespace LawProject.Application.Features.QuestionAnswers.Commands.Create
             return new Response<Question>(question);
         }
 
-        public async Task<Response<long>> Handle(CreateQuestionFrClientCommand request, CancellationToken cancellationToken)
+        public async Task<Response<long>> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
         {
             var question = new Question();
             question.QuesContent = StringUtils.GetSafeHtml(request.QuesContent);

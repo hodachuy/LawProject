@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LawProject.Application.Features.QuestionAnswers.Commands.Create
 {
-    public class CreateQuestionCommandValidator : AbstractValidator<CreateQuestionAnswerFrAdminCommand>
+    public class CreateQuestionCommandValidator : AbstractValidator<CreateQuestionAnswerCommand>
     {
         private readonly IQuestionRepositoryAsync questionRepository;
 

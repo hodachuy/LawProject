@@ -29,6 +29,7 @@ namespace LawProject.Application.Features.Products.Commands.CreateProduct
         public async Task<Response<long>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             var product = _mapper.Map<Product>(request);
+            product.Done = true;
             await _productRepository.AddAsync(product);
             return new Response<long>(product.Id);
         }

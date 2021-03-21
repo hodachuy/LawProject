@@ -17,12 +17,15 @@ namespace LawProject.Infrastructure.Persistence.Contexts
     {
         private readonly IDateTimeService _dateTime;
         private readonly IAuthenticatedUserService _authenticatedUser;
+        private readonly IDomainEventService _domainEventService;
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDateTimeService dateTime, IAuthenticatedUserService authenticatedUser) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDateTimeService dateTime, IAuthenticatedUserService authenticatedUser, IDomainEventService domainEventService) : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             _dateTime = dateTime;
             _authenticatedUser = authenticatedUser;
+            _domainEventService = domainEventService;
+
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Activity> Activities { get; set; }
@@ -66,7 +69,11 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             TrackChanges();
-            return base.SaveChangesAsync(cancellationToken);
+            var result = base.SaveChangesAsync(cancellationToken);
+
+            DispatchEvents();
+
+            return result;
         }
 
         private void TrackChanges()
@@ -84,6 +91,21 @@ namespace LawProject.Infrastructure.Persistence.Contexts
                         entry.Entity.LastModifiedBy = _authenticatedUser.UserId;
                         break;
                 }
+            }
+        }
+        private async Task DispatchEvents()
+        {
+            while (true)
+            {
+                var domainEventEntity = ChangeTracker.Entries<IHasDomainEvent>()
+                    .Select(x => x.Entity.DomainEvents)
+                    .SelectMany(x => x)
+                    .Where(domainEvent => !domainEvent.IsPublished)
+                    .FirstOrDefault();
+                if (domainEventEntity == null) break;
+
+                domainEventEntity.IsPublished = true;
+                await _domainEventService.Publish(domainEventEntity);
             }
         }
         protected override void OnModelCreating(ModelBuilder builder)

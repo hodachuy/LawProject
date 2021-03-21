@@ -15,6 +15,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.IsDelete).HasDefaultValue(false);
+            builder.Ignore(x => x.DomainEvents);
         }
     }
 }

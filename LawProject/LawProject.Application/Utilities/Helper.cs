@@ -16,16 +16,16 @@ namespace LawProject.Application.Utilities
         public static string GetLegalCodeFrString(string contents)
         {
             string lgCode = null;
-            List<string> _lstLegalCode = new List<string>();
+            List<string> lstLegalCode = new List<string>();
             Regex rReg = new Regex("(\\d{1,5}\\/)?\\d{1,5}(\\-\\w+)?\\/([a-zA-ZĐ\\-]+)", RegexOptions.Singleline);
-            Match _rLegalCode = rReg.Match(contents);
-            while (_rLegalCode.Success)
+            Match mLegalCode = rReg.Match(contents);
+            while (mLegalCode.Success)
             {
-                _lstLegalCode.Add(_rLegalCode.ToString());
-                _rLegalCode = _rLegalCode.NextMatch();
+                lstLegalCode.Add(mLegalCode.ToString());
+                mLegalCode = mLegalCode.NextMatch();
             }
-            if (_lstLegalCode.Count != 0)
-                lgCode = string.Join(",", _lstLegalCode.ToArray());
+            if (lstLegalCode.Count != 0)
+                lgCode = string.Join(",", lstLegalCode.ToArray());
             return lgCode;
         }
 

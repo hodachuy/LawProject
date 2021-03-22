@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LawProject.Application.Features.QuestionAnswers.EvenHandlers
+namespace LawProject.Application.Features.Products.EvenHandlers
 {
     public class ProductCreatedEventHandler : INotificationHandler<DomainEventNotification<ProductCreatedEvent>>
     {

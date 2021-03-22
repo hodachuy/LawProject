@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LawProject.Domain.Entities
 {
-    public class Product : AuditableBaseEntity
+    public class Product : AuditableBaseEntity, IHasDomainEvent
     {
         public long Id { get; set; }
         public string Name { get; set; }

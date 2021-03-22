@@ -63,16 +63,16 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         public override int SaveChanges()
         {
             TrackChanges();
-            return base.SaveChanges();
+            var result =  base.SaveChanges();
+            DispatchEvents();
+            return result;
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             TrackChanges();
-            var result = base.SaveChangesAsync(cancellationToken);
-
-            DispatchEvents();
-
+            var result = await base.SaveChangesAsync(cancellationToken);
+            await DispatchEvents();
             return result;
         }
 
@@ -93,6 +93,11 @@ namespace LawProject.Infrastructure.Persistence.Contexts
                 }
             }
         }
+
+        /// <summary>
+        /// dispatch domain event to logs 
+        /// </summary>
+        /// <returns></returns>
         private async Task DispatchEvents()
         {
             while (true)

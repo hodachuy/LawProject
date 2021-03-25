@@ -64,7 +64,6 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         {
             TrackChanges();
             var result =  base.SaveChanges();
-            DispatchEvents();
             return result;
         }
 

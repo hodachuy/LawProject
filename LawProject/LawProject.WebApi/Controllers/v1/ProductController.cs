@@ -19,11 +19,16 @@ namespace LawProject.WebApi.Controllers.v1
             _logger = logger;
         }
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetAllProductsParameter filter)
+        public async Task<IActionResult> Get([FromQuery] GetAllProductsQuery filter)
         {
-
-            return Ok(await Mediator.Send(new GetAllProductsQuery() {Keyword = filter.Keyword, PageSize = filter.PageSize, PageNumber = filter.PageNumber }));
+            return Ok(await Mediator.Send(filter));
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> Get([FromQuery] GetAllProductsParameter filter)
+        //{
+        //    return Ok(await Mediator.Send(new GetAllProductsQuery() { Keyword = filter.Keyword, PageNumber = filter.PageNumber, PageSize = filter.PageSize}));
+        //}
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)

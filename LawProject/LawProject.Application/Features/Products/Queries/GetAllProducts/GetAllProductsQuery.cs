@@ -11,11 +11,9 @@ using System.Threading.Tasks;
 
 namespace LawProject.Application.Features.Products.Queries.GetAllProducts
 {
-    public class GetAllProductsQuery : IRequest<PagedResponse<IEnumerable<GetAllProductsViewModel>>>
+    public class GetAllProductsQuery : RequestParameter, IRequest<PagedResponse<IEnumerable<GetAllProductsViewModel>>>
     {
         public string Keyword { get; set; }
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
     }
     public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, PagedResponse<IEnumerable<GetAllProductsViewModel>>>
     {
@@ -29,10 +27,10 @@ namespace LawProject.Application.Features.Products.Queries.GetAllProducts
 
         public async Task<PagedResponse<IEnumerable<GetAllProductsViewModel>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var validFilter = _mapper.Map<GetAllProductsParameter>(request);
-            var product = await _productRepository.GetPagedReponseAsync(validFilter.PageNumber, validFilter.PageSize);
+            //var validFilter = _mapper.Map<GetAllProductsParameter>(request);
+            var product = await _productRepository.GetPagedReponseAsync(request.PageNumber, request.PageSize);
             var productViewModel = _mapper.Map<IEnumerable<GetAllProductsViewModel>>(product);
-            return new PagedResponse<IEnumerable<GetAllProductsViewModel>>(productViewModel, validFilter.PageNumber, validFilter.PageSize);
+            return new PagedResponse<IEnumerable<GetAllProductsViewModel>>(productViewModel, request.PageNumber, request.PageSize);
         }
     }
 }

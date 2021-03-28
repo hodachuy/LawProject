@@ -12,7 +12,7 @@ namespace LawProject.Application.Features.LegalDocuments.Queries.GetAll
 {
     public class GetAllLegalsQuery : IRequest<PagedResponse<IEnumerable<GetAllLegalsViewModel>>>
     {
-        public Dictionary<string, string> ParamsFilter { get; set; }
+        public Dictionary<string, string> ParamFilters { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
     }

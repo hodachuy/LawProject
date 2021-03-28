@@ -7,6 +7,6 @@ namespace LawProject.Application.Features.LegalDocuments.Queries.GetAll
 {
     public class GetAllLegalsParameter : RequestParameter
     {
-        public Dictionary<string,string> ParamsFilter { get; set; }
+        public Dictionary<string,string> ParamFilters { get; set; }
     }
 }

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace LawProject.Domain.Common
 {
-    public abstract class BaseEntity : EntityBaseWithTypeId<long>
+    public interface IEntityWithTypeId<TId>
     {
+        TId Id { get;}
     }
 }

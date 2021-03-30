@@ -15,7 +15,7 @@ namespace LawProject.Domain.Entities
         public long? AreaID { get; set; }
         public string QuesContentText { get; set; }
         public Status.QuestionAnswer StatusValue { get; set; } //Status
-        public bool IsTraining { get; set; }// IsToAPI
+        public bool IsTrained { get; set; }// IsToAPI
         public long ViewCount { get; set; } // CountView
         public virtual Answer Answer { get; set; }
         public virtual Area Area { get; set; }

@@ -84,7 +84,8 @@ namespace LawProject.Domain.Enum
             DINH_CHI_HIEU_LUC = 7,
             DINH_CHI_MOT_PHAN_HIEU_LUC = 8,
             KHONG_CON_PHU_HOP = 9,
-            CHUA_XAC_DINH = 10
+            DA_BIET = 10,
+            CHUA_XAC_DINH = 11
         }
     }
 }

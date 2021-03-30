@@ -25,7 +25,6 @@ namespace LawProject.Infrastructure.Persistence.Contexts
             _dateTime = dateTime;
             _authenticatedUser = authenticatedUser;
             _domainEventService = domainEventService;
-
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Activity> Activities { get; set; }
@@ -39,6 +38,7 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         public DbSet<Editor> Editors { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<LegalDocument> LegalDocuments { get; set; }
+        public DbSet<LegalDocumentFile> LegalDocumentFiles { get; set; }
         public DbSet<LegalDocumentGroup> LegalDocumentGroups { get; set; }
         public DbSet<LegalDocumentRelate> LegalDocumentRelates { get; set; }
         public DbSet<LegalDocumentType> LegalDocumentTypes { get; set; }
@@ -63,8 +63,7 @@ namespace LawProject.Infrastructure.Persistence.Contexts
         public override int SaveChanges()
         {
             TrackChanges();
-            var result =  base.SaveChanges();
-            return result;
+            return base.SaveChanges();
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -129,6 +128,7 @@ namespace LawProject.Infrastructure.Persistence.Contexts
             builder.ApplyConfiguration(new LawOfficeConfiguration());
             builder.ApplyConfiguration(new LawyerConfiguration());
             builder.ApplyConfiguration(new LegalDocumentConfiguration());
+            builder.ApplyConfiguration(new LegalDocumentFileConfiguration());
             builder.ApplyConfiguration(new LegalDocumentGroupConfiguration());
             builder.ApplyConfiguration(new LegalDocumentRelateConfiguration());
             builder.ApplyConfiguration(new LegalDocumentTypeConfiguration());

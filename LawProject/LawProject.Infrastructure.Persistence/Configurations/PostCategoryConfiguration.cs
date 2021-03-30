@@ -18,12 +18,12 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.Name).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Alias).IsRequired().HasColumnType("varchar").HasMaxLength(250);
             builder.Property(x => x.CreatedDate).IsRequired();
-            builder.Property(x => x.IsDelete).HasDefaultValue(false);
+            builder.Property(x => x.IsDeleted).HasDefaultValue(false);
             builder.Property(x => x.Description).HasMaxLength(550);
 
             builder.HasMany<Post>(ad => ad.Posts)
                 .WithOne(x => x.PostCategory)
-                .HasForeignKey(ad => ad.PostID);
+                .HasForeignKey(ad => ad.PostCategoryID);
         }
     }
 }

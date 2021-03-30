@@ -15,7 +15,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.HasKey(x => x.PartID);
             builder.Property(x => x.PartID).UseIdentityColumn();
             builder.Property(x => x.PartID).IsRequired();
-            builder.Property(x => x.IsDelete).HasDefaultValue(false);
+            builder.Property(x => x.IsDeleted).HasDefaultValue(false);
             builder.Property(x => x.LegalID).IsRequired();
             builder.Property(x => x.Idx).HasDefaultValue(0);
 

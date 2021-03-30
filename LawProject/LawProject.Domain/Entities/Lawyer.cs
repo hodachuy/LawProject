@@ -24,6 +24,6 @@ namespace LawProject.Domain.Entities
         public int? DistrictID { get; set; }
         public int? ProvinceID { get; set; }
         public int SortOrder { get; set; }
-        public bool IsPublish { get; set; }
+        public bool IsPublished { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace LawProject.Domain.Entities
 {
     public class PostCategory : AuditableBaseEntity
 	{
-		public int PostCategoryID { set; get; }
+		public long PostCategoryID { set; get; }
 		public string Name { set; get; }
 		public string Alias { set; get; }
 		public string Description { set; get; }

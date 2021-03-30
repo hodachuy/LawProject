@@ -20,7 +20,7 @@ namespace LawProject.Domain.Entities
         public DateTime CreatedDate { get; set; }
         public string LastModifiedBy { get; set; }
         public DateTime? LastModifiedDate { get; set; }
-        public bool IsDelete { get; set; }
+        public bool IsDeleted { get; set; }
         public virtual Question Question { get; set; }
     }
 }

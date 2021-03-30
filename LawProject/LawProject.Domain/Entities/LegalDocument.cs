@@ -17,7 +17,7 @@ namespace LawProject.Domain.Entities
         public string PublishNo { get; set; }
         public DateTime? PublishedDate { get; set; }
         public DateTime? ExpirationDate { get; set; }
-        public bool IsPublish { get; set; } // IsEffect
+        public bool IsPublished { get; set; } // IsEffect
         public long? DocTypeID { get; set; }
         public long? AgencyID { get; set; }
         public long? AreaID { get; set; }
@@ -54,5 +54,6 @@ namespace LawProject.Domain.Entities
         public virtual District District { get; set; }
         public virtual Province Province { get; set; }
         public virtual IEnumerable<Part> Parts { get; set; }
+        public virtual IEnumerable<LegalDocumentFile> LegalDocumentFiles { get; set; }
     }
 }

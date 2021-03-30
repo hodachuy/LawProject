@@ -21,7 +21,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.VoteLike).HasDefaultValue(0);
             builder.Property(x => x.IsSolution).HasDefaultValue(false);
             builder.Property(x => x.FlaggedAsSpam).HasDefaultValue(false);
-            builder.Property(x => x.Pending).HasDefaultValue(true);
+            builder.Property(x => x.Pending).HasDefaultValue(false);
 
             builder.HasOne<Question>(ad => ad.Question)
                 .WithMany(x => x.QuestionComments)

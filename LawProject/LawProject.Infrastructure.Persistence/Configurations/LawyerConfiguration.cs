@@ -17,7 +17,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.LawyerID).IsRequired();
             builder.Property(x => x.AccountID).IsRequired();
             builder.Property(x => x.SocialNetwork).IsUnicode(false).HasMaxLength(250);
-            builder.Property(x => x.IsPublish).HasDefaultValue(false);
+            builder.Property(x => x.IsPublished).HasDefaultValue(false);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(350);
             builder.Property(x => x.PhoneNumber).HasColumnType("varchar").HasMaxLength(20);
             builder.Property(x => x.Website).IsUnicode(false);

@@ -18,8 +18,8 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.Name).IsRequired().HasMaxLength(350);
             builder.Property(x => x.Alias).IsRequired().HasColumnType("varchar").HasMaxLength(350);
             builder.Property(x => x.CreatedDate).IsRequired();
-            builder.Property(x => x.IsDelete).HasDefaultValue(false);
-            builder.Property(x => x.IsPublish).HasDefaultValue(false);
+            builder.Property(x => x.IsDeleted).HasDefaultValue(false);
+            builder.Property(x => x.IsPublished).HasDefaultValue(false);
             builder.Property(x => x.ViewCount).HasDefaultValue(0);
             builder.Property(x => x.Description).HasMaxLength(550);
 

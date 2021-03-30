@@ -12,6 +12,6 @@ namespace LawProject.Domain.Common
         public DateTime? LastModifiedDate { get; set; }
         public string MetaKeyword { get; set; }
         public string MetaDescription { get; set; }
-        public bool IsDelete { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

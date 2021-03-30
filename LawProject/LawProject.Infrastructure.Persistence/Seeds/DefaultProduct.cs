@@ -19,7 +19,7 @@ namespace LawProject.Infrastructure.Persistence.Seeds
                 Name = "ABC",
                 Barcode = "123456",
                 Description = "Mo ta",
-                IsDelete = false
+                IsDeleted = false
             };
             await _productRepository.AddAsync(defaultProduct);
         }

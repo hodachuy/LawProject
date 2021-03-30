@@ -16,8 +16,8 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.LegalID).UseIdentityColumn();
             builder.Property(x => x.LegalID).IsRequired();
             builder.Property(x => x.Title).IsRequired();
-            builder.Property(x => x.IsDelete).HasDefaultValue(false);
-            builder.Property(x => x.IsPublish).HasDefaultValue(false);
+            builder.Property(x => x.IsDeleted).HasDefaultValue(false);
+            builder.Property(x => x.IsPublished).HasDefaultValue(false);
             builder.Property(x => x.IsTraining).HasDefaultValue(false);
             builder.Property(x => x.LegalGroupID).IsRequired();
             builder.Property(x => x.ViewCount).HasDefaultValue(0);
@@ -50,7 +50,11 @@ namespace LawProject.Infrastructure.Persistence.Configurations
 
             builder.HasMany<Part>(ad => ad.Parts)
                 .WithOne(x => x.LegalDocument)
-                .HasForeignKey(ad => ad.PartID);
+                .HasForeignKey(ad => ad.LegalID);
+
+            builder.HasMany<LegalDocumentFile>(ad => ad.LegalDocumentFiles)
+                .WithOne(x => x.LegalDocument)
+                .HasForeignKey(ad => ad.LegalID);
         }
     }
 }

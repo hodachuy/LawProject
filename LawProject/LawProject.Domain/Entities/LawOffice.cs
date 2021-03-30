@@ -19,6 +19,6 @@ namespace LawProject.Domain.Entities
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public int SortOrder { get; set; }
-        public bool IsPublish { get; set; }
+        public bool IsPublished { get; set; }
     }
 }

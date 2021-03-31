@@ -15,4 +15,8 @@
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LawProject.ApiIntegration\LawProject.ApiIntegration.csproj" />
+  </ItemGroup>
+
 </Project>

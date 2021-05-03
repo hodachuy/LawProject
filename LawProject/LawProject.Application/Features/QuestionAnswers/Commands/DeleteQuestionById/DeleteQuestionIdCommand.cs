@@ -23,7 +23,7 @@ namespace LawProject.Application.Features.QuestionAnswers.Commands.DeleteQuestio
             public async Task<Response<long>> Handle(DeleteQuestionIdCommand command, CancellationToken cancellationToken)
             {
                 var question = await _questionRepository.GetByIdAsync(command.Id);
-                if (question == null) throw new ApiException($"Question Not Found.");
+                if (question  == null) throw new ApiException($"Question Not Found.");
                 await _questionRepository.DeleteAsync(question);
                 return new Response<long>(question.QuesID);
             }

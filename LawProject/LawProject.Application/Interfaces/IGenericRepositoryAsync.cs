@@ -8,7 +8,7 @@ namespace LawProject.Application.Interfaces
 {
     public interface IGenericRepositoryAsync<T> where T : class
     {
-        Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null, Expression<Func<T, T>> columns = null);
+        Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null);
         Task<T> GetByIdAsync(long id);
         Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> GetAll(string[] includes = null);

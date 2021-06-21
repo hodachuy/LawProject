@@ -68,7 +68,7 @@ namespace LawProject.Infrastructure.Persistence.Repository
                  .AsNoTracking()
                  .ToListAsync();
         }
-        public async Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null, Expression<Func<T, T>> columns = null)
+        public async Task<T> GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)
         {
             if (includes != null && includes.Count() > 0)
             {
@@ -76,14 +76,8 @@ namespace LawProject.Infrastructure.Persistence.Repository
                 foreach (var include in includes)
                     query = query.Include(include).AsTracking();
 
-                if(columns != null)
-                    return await query.Where(expression).Select(columns).FirstOrDefaultAsync();
-
                 return await query.FirstOrDefaultAsync(expression);
             }
-
-            if (columns != null)
-                return await _dbContext.Set<T>().AsNoTracking().Where(expression).Select(columns).FirstOrDefaultAsync();
 
             return await _dbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(expression);
         }

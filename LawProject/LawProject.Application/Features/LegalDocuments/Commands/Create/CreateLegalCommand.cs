@@ -49,8 +49,8 @@ namespace LawProject.Application.Features.LegalDocuments.Commands.Create
         public string FooterRecipients { get; set; }
         public string FooterSigner { get; set; }
         public string FooterAppendix { get; set; }
-        public bool IsTraining { get; set; }
-        public bool IsAppendix { get; set; }
+        public bool HasTrained { get; set; }
+        public bool HasAppendix { get; set; }
     }
 
     public class CreateLegalCommandHandler : IRequestHandler<CreateLegalCommand, Response<long>>

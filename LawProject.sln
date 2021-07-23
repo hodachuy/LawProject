@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawProject.Infrastructure.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawProject.WebMVC", "LawProject\LawProject.WebMVC\LawProject.WebMVC.csproj", "{E108A328-E60D-40DF-974C-9A327E14E239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawProject.ApiIntegration", "LawProject\LawProject.ApiIntegration\LawProject.ApiIntegration.csproj", "{9550AD65-FC3D-4216-BF30-411189382626}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawProject.ApiIntegration", "LawProject\LawProject.ApiIntegration\LawProject.ApiIntegration.csproj", "{9550AD65-FC3D-4216-BF30-411189382626}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -33,7 +33,7 @@ namespace LawProject.Infrastructure.Identity
             else
             {
                 services.AddDbContext<IdentityContext>(options =>
-                options.UseNpgsql(
+                options.UseSqlServer(
                     configuration.GetConnectionString("LawProjectConnection"),//IdentityConnection
                     b => b.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName)));
             }

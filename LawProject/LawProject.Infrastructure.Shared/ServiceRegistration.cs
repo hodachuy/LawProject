@@ -13,8 +13,6 @@ namespace LawProject.Infrastructure.Shared
             services.Configure<MailSettings>(_config.GetSection("MailSettings"));
             services.AddTransient<IDateTimeService, DateTimeService>();
             services.AddTransient<IEmailService, EmailService>();
-            services.AddScoped<IDomainEventService, DomainEventService>();
-
         }
     }
 }

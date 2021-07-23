@@ -24,14 +24,13 @@ namespace LawProject.Infrastructure.Persistence
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseNpgsql(
+               options.UseSqlServer(
                    configuration.GetConnectionString("LawProjectConnection"),
                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)).EnableSensitiveDataLogging());
             }
 
             #region Repositories
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
-            services.AddTransient<IProductRepositoryAsync, ProductRepositoryAsync>();
             services.AddTransient<IActivityRepositoryAsync, ActivityRepositoryAsync>();
             services.AddTransient<IAgencyRepositoryAsync, AgencyRepositoryAsync>();
             services.AddTransient<IAnswerRepositoryAsync, AnswerRepositoryAsync>();

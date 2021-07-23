@@ -18,6 +18,10 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.LegalRelateID).IsRequired();
             builder.Property(x => x.LegalSourceID).IsRequired();
             builder.Property(x => x.LegalTypeID).IsRequired();
+
+            builder.HasOne<LegalDocument>(ad => ad.LegalDocument)
+                .WithMany(x => x.LegalDocumentRelates)
+                .HasForeignKey(ad => ad.LegalSourceID);
         }
     }
 }

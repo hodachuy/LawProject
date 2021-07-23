@@ -16,7 +16,6 @@ namespace LawProject.Infrastructure.Identity.Contexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.HasDefaultSchema("public");
             builder.Entity<ApplicationUser>(entity =>
             {
                 entity.ToTable(name: "User");

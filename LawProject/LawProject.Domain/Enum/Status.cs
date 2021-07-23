@@ -42,10 +42,10 @@ namespace LawProject.Domain.Enum
         /// </summary>
         public enum Notify
         {
-            SHOW_NOT_READ = 1,
-            HIDDEN_NOT_READ = 2,
-            SHOW_READED = 3,
-            HIDDEN_READED = 4
+            ShowNotRead = 1,
+            HiddenNotRead = 2,
+            ShowReaded = 3,
+            HiddenReaded = 4
         }
 
         /// <summary>

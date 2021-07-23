@@ -20,7 +20,7 @@ namespace LawProject.Application.Features.QuestionAnswers.Commands.Create
         public long? AreaID { get; set; }
         public string QuesContentText { get; set; }
         public Status.QuestionAnswer StatusValue { get; set; }
-        public bool IsTraining { get; set; }
+        public bool HasTrained { get; set; }
         public long ViewCount { get; set; }
     }
 

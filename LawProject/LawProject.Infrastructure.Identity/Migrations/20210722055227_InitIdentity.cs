@@ -1,19 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LawProject.Infrastructure.Identity.Migrations
 {
-    public partial class InitUserIdentity : Migration
+    public partial class InitIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "public");
-
             migrationBuilder.CreateTable(
                 name: "Role",
-                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -28,7 +23,6 @@ namespace LawProject.Infrastructure.Identity.Migrations
 
             migrationBuilder.CreateTable(
                 name: "User",
-                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -61,11 +55,10 @@ namespace LawProject.Infrastructure.Identity.Migrations
 
             migrationBuilder.CreateTable(
                 name: "RoleClaims",
-                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -76,7 +69,6 @@ namespace LawProject.Infrastructure.Identity.Migrations
                     table.ForeignKey(
                         name: "FK_RoleClaims_Role_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "public",
                         principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -84,11 +76,10 @@ namespace LawProject.Infrastructure.Identity.Migrations
 
             migrationBuilder.CreateTable(
                 name: "RefreshToken",
-                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Token = table.Column<string>(nullable: true),
                     Expires = table.Column<DateTime>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
@@ -104,7 +95,6 @@ namespace LawProject.Infrastructure.Identity.Migrations
                     table.ForeignKey(
                         name: "FK_RefreshToken_User_ApplicationUserId",
                         column: x => x.ApplicationUserId,
-                        principalSchema: "public",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -112,11 +102,10 @@ namespace LawProject.Infrastructure.Identity.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserClaims",
-                schema: "public",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -127,7 +116,6 @@ namespace LawProject.Infrastructure.Identity.Migrations
                     table.ForeignKey(
                         name: "FK_UserClaims_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "public",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -135,7 +123,6 @@ namespace LawProject.Infrastructure.Identity.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserLogins",
-                schema: "public",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(nullable: false),
@@ -149,7 +136,6 @@ namespace LawProject.Infrastructure.Identity.Migrations
                     table.ForeignKey(
                         name: "FK_UserLogins_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "public",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -157,7 +143,6 @@ namespace LawProject.Infrastructure.Identity.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserRoles",
-                schema: "public",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -169,14 +154,12 @@ namespace LawProject.Infrastructure.Identity.Migrations
                     table.ForeignKey(
                         name: "FK_UserRoles_Role_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "public",
                         principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserRoles_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "public",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -184,7 +167,6 @@ namespace LawProject.Infrastructure.Identity.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserTokens",
-                schema: "public",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -198,7 +180,6 @@ namespace LawProject.Infrastructure.Identity.Migrations
                     table.ForeignKey(
                         name: "FK_UserTokens_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "public",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -206,51 +187,45 @@ namespace LawProject.Infrastructure.Identity.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshToken_ApplicationUserId",
-                schema: "public",
                 table: "RefreshToken",
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                schema: "public",
                 table: "Role",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
-                schema: "public",
                 table: "RoleClaims",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                schema: "public",
                 table: "User",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                schema: "public",
                 table: "User",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
-                schema: "public",
                 table: "UserClaims",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserLogins_UserId",
-                schema: "public",
                 table: "UserLogins",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",
-                schema: "public",
                 table: "UserRoles",
                 column: "RoleId");
         }
@@ -258,36 +233,28 @@ namespace LawProject.Infrastructure.Identity.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RefreshToken",
-                schema: "public");
+                name: "RefreshToken");
 
             migrationBuilder.DropTable(
-                name: "RoleClaims",
-                schema: "public");
+                name: "RoleClaims");
 
             migrationBuilder.DropTable(
-                name: "UserClaims",
-                schema: "public");
+                name: "UserClaims");
 
             migrationBuilder.DropTable(
-                name: "UserLogins",
-                schema: "public");
+                name: "UserLogins");
 
             migrationBuilder.DropTable(
-                name: "UserRoles",
-                schema: "public");
+                name: "UserRoles");
 
             migrationBuilder.DropTable(
-                name: "UserTokens",
-                schema: "public");
+                name: "UserTokens");
 
             migrationBuilder.DropTable(
-                name: "Role",
-                schema: "public");
+                name: "Role");
 
             migrationBuilder.DropTable(
-                name: "User",
-                schema: "public");
+                name: "User");
         }
     }
 }

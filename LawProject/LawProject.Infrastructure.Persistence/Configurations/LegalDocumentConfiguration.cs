@@ -18,7 +18,7 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
             builder.Property(x => x.IsPublished).HasDefaultValue(false);
-            builder.Property(x => x.IsTraining).HasDefaultValue(false);
+            builder.Property(x => x.IsTrained).HasDefaultValue(false);
             builder.Property(x => x.LegalGroupID).IsRequired();
             builder.Property(x => x.ViewCount).HasDefaultValue(0);
             builder.Property(x => x.IsHasAppendix).HasDefaultValue(false);
@@ -55,6 +55,10 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.HasMany<LegalDocumentFile>(ad => ad.LegalDocumentFiles)
                 .WithOne(x => x.LegalDocument)
                 .HasForeignKey(ad => ad.LegalID);
+
+            builder.HasMany<LegalDocumentRelate>(ad => ad.LegalDocumentRelates)
+                .WithOne(x => x.LegalDocument)
+                .HasForeignKey(ad => ad.LegalSourceID);
         }
     }
 }

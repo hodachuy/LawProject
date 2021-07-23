@@ -22,7 +22,7 @@ namespace LawProject.Infrastructure.Identity.Seeds
                 Email = "hdhuy@lacviet.com.vn",
                 FirstName = "Huy",
                 LastName = "Ho",
-                FullName = "Ban biên tập",
+                FullName = "Huy Ho",
                 Gender = true,
                 Birthday = DateTime.Now,
                 EmailConfirmed = true,

@@ -12,5 +12,7 @@ namespace LawProject.Domain.Entities
         public long LegalSourceID { set; get; }
         public long LegalRelateID { set; get; }
         public long LegalTypeID { set; get; }
+        public virtual LegalDocument LegalDocument { get; set; }
+
     }
 }

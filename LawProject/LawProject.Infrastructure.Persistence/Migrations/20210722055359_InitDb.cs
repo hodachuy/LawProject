@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LawProject.Infrastructure.Persistence.Migrations
 {
-    public partial class AddItemEntityDb : Migration
+    public partial class InitDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +12,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     ActivityID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<string>(maxLength: 50, nullable: false),
                     Data = table.Column<string>(nullable: false),
                     Timestamp = table.Column<DateTime>(nullable: false)
@@ -28,7 +27,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     AgencyID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Description = table.Column<string>(nullable: true),
                     PAgencyID = table.Column<long>(nullable: true),
@@ -44,7 +43,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     AreaID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Alias = table.Column<string>(maxLength: 250, nullable: false),
                     Description = table.Column<string>(nullable: true),
@@ -57,52 +56,14 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Articles",
-                columns: table => new
-                {
-                    ArticleID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ItemID = table.Column<long>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    Contents = table.Column<string>(nullable: true),
-                    Idx = table.Column<int>(nullable: false, defaultValue: 0),
-                    IsDelete = table.Column<bool>(nullable: false),
-                    LegalID = table.Column<long>(nullable: false),
-                    DocAttach = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Articles", x => x.ArticleID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Chapters",
-                columns: table => new
-                {
-                    ChapID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PartID = table.Column<long>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    Contents = table.Column<string>(nullable: true),
-                    Idx = table.Column<int>(nullable: false, defaultValue: 0),
-                    IsDelete = table.Column<bool>(nullable: false),
-                    LegalID = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Chapters", x => x.ChapID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DocumentsTypes",
                 columns: table => new
                 {
                     DocID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Description = table.Column<string>(nullable: true),
                     PDocID = table.Column<long>(nullable: true),
-                    LegalGroupID = table.Column<long>(nullable: true),
                     SortOrder = table.Column<int>(nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
@@ -115,10 +76,10 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     EditorID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    PEditorID = table.Column<long>(nullable: false),
+                    PEditorID = table.Column<long>(nullable: true),
                     SortOrder = table.Column<int>(nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
@@ -127,35 +88,18 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Items",
-                columns: table => new
-                {
-                    ItemID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ChapID = table.Column<long>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Contents = table.Column<string>(nullable: true),
-                    Idx = table.Column<int>(nullable: false, defaultValue: 0),
-                    IsDelete = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Items", x => x.ItemID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "LawOffices",
                 columns: table => new
                 {
                     LawOfficeID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MetaKeyword = table.Column<string>(nullable: true),
                     MetaDescription = table.Column<string>(nullable: true),
-                    IsDelete = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 350, nullable: false),
                     Website = table.Column<string>(unicode: false, nullable: true),
@@ -167,7 +111,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                     Address = table.Column<string>(maxLength: 500, nullable: true),
                     PhoneNumber = table.Column<string>(type: "varchar", maxLength: 20, nullable: true),
                     SortOrder = table.Column<int>(nullable: false, defaultValue: 0),
-                    IsPublish = table.Column<bool>(nullable: false, defaultValue: false)
+                    IsPublished = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -179,14 +123,14 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     LawyerID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MetaKeyword = table.Column<string>(nullable: true),
                     MetaDescription = table.Column<string>(nullable: true),
-                    IsDelete = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 350, nullable: false),
                     Image = table.Column<string>(nullable: true),
@@ -203,7 +147,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                     DistrictID = table.Column<int>(nullable: true),
                     ProvinceID = table.Column<int>(nullable: true),
                     SortOrder = table.Column<int>(nullable: false, defaultValue: 0),
-                    IsPublish = table.Column<bool>(nullable: false, defaultValue: false)
+                    IsPublished = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -215,7 +159,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     LegalGroupID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Alias = table.Column<string>(maxLength: 250, nullable: false),
                     Value = table.Column<long>(nullable: true),
@@ -231,7 +175,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     ID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     LegalSourceID = table.Column<long>(nullable: false),
                     LegalRelateID = table.Column<long>(nullable: false),
                     LegalTypeID = table.Column<long>(nullable: false)
@@ -246,7 +190,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     LegalTypeID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Alias = table.Column<string>(maxLength: 350, nullable: false),
                     Description = table.Column<string>(nullable: true)
@@ -261,13 +205,13 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Message = table.Column<string>(nullable: false),
                     SenderID = table.Column<int>(nullable: true),
                     RecipientID = table.Column<int>(nullable: true),
                     EntityName = table.Column<string>(nullable: true),
                     EntityID = table.Column<string>(nullable: true),
-                    StatusValue = table.Column<int>(nullable: false, defaultValue: 0),
+                    StatusValue = table.Column<int>(nullable: false, defaultValue: 1),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     URL = table.Column<string>(nullable: true)
                 },
@@ -281,14 +225,14 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     PageID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MetaKeyword = table.Column<string>(nullable: true),
                     MetaDescription = table.Column<string>(nullable: true),
-                    IsDelete = table.Column<bool>(nullable: false, defaultValue: false),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     Content = table.Column<string>(nullable: false),
                     Name = table.Column<string>(maxLength: 350, nullable: false),
                     Alias = table.Column<string>(maxLength: 350, nullable: false),
@@ -300,28 +244,36 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Parts",
+                name: "PostCategories",
                 columns: table => new
                 {
-                    PartID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(nullable: true),
-                    Contents = table.Column<string>(nullable: true),
-                    Idx = table.Column<int>(nullable: false, defaultValue: 0),
-                    IsDelete = table.Column<bool>(nullable: false, defaultValue: false),
-                    LegalID = table.Column<long>(nullable: false)
+                    PostCategoryID = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(nullable: true),
+                    MetaKeyword = table.Column<string>(nullable: true),
+                    MetaDescription = table.Column<string>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
+                    Name = table.Column<string>(maxLength: 250, nullable: false),
+                    Alias = table.Column<string>(type: "varchar", maxLength: 250, nullable: false),
+                    Description = table.Column<string>(maxLength: 550, nullable: true),
+                    ParentID = table.Column<int>(nullable: true),
+                    DisplayOrder = table.Column<int>(nullable: true),
+                    Image = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Parts", x => x.PartID);
-                });          
+                    table.PrimaryKey("PK_PostCategories", x => x.PostCategoryID);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Provinces",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Type = table.Column<string>(nullable: true),
                     TelephoneCode = table.Column<int>(nullable: false),
@@ -355,13 +307,12 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     FileID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FileName = table.Column<string>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     QuesID = table.Column<long>(nullable: true),
                     CommentID = table.Column<long>(nullable: true),
                     AnswerID = table.Column<long>(nullable: true),
-                    LegalID = table.Column<long>(nullable: true),
                     AccountID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -374,14 +325,14 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     QuesID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MetaKeyword = table.Column<string>(nullable: true),
                     MetaDescription = table.Column<string>(nullable: true),
-                    IsDelete = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     QuesCode = table.Column<string>(nullable: false),
                     QuesContent = table.Column<string>(nullable: false),
                     Title = table.Column<string>(nullable: true),
@@ -389,7 +340,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                     AreaID = table.Column<long>(nullable: true),
                     QuesContentText = table.Column<string>(nullable: true),
                     StatusValue = table.Column<int>(nullable: false, defaultValue: 1),
-                    IsTraining = table.Column<bool>(nullable: false),
+                    IsTrained = table.Column<bool>(nullable: false, defaultValue: false),
                     ViewCount = table.Column<long>(nullable: false, defaultValue: 0L)
                 },
                 constraints: table =>
@@ -404,11 +355,44 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Posts",
+                columns: table => new
+                {
+                    PostID = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(nullable: true),
+                    MetaKeyword = table.Column<string>(nullable: true),
+                    MetaDescription = table.Column<string>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
+                    Name = table.Column<string>(maxLength: 350, nullable: false),
+                    Alias = table.Column<string>(type: "varchar", maxLength: 350, nullable: false),
+                    PostCategoryID = table.Column<long>(nullable: false),
+                    Image = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(maxLength: 550, nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    IsPublished = table.Column<bool>(nullable: false, defaultValue: false),
+                    ViewCount = table.Column<int>(nullable: true, defaultValue: 0)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Posts", x => x.PostID);
+                    table.ForeignKey(
+                        name: "FK_Posts_PostCategories_PostCategoryID",
+                        column: x => x.PostCategoryID,
+                        principalTable: "PostCategories",
+                        principalColumn: "PostCategoryID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Districts",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Type = table.Column<string>(nullable: true),
                     LatiLongTude = table.Column<string>(nullable: true),
@@ -433,14 +417,14 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     AnswerID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MetaKeyword = table.Column<string>(nullable: true),
                     MetaDescription = table.Column<string>(nullable: true),
-                    IsDelete = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     AnswerContent = table.Column<string>(nullable: true),
                     AccountID = table.Column<string>(nullable: true),
                     QuesID = table.Column<long>(nullable: false)
@@ -461,13 +445,13 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     CommentID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(nullable: false),
                     ContentText = table.Column<string>(nullable: true),
                     IsSolution = table.Column<bool>(nullable: false, defaultValue: false),
                     FlaggedAsSpam = table.Column<bool>(nullable: false, defaultValue: false),
                     IpAddress = table.Column<string>(nullable: true),
-                    Pending = table.Column<bool>(nullable: false, defaultValue: true),
+                    Pending = table.Column<bool>(nullable: false, defaultValue: false),
                     AccountID = table.Column<string>(nullable: false),
                     QuesID = table.Column<long>(nullable: false),
                     VoteLike = table.Column<long>(nullable: false, defaultValue: 0L),
@@ -475,7 +459,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
-                    IsDelete = table.Column<bool>(nullable: false)
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -513,18 +497,41 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PostTags",
+                columns: table => new
+                {
+                    PostID = table.Column<long>(nullable: false),
+                    TagID = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PostTags", x => new { x.PostID, x.TagID });
+                    table.ForeignKey(
+                        name: "FK_PostTags_Posts_PostID",
+                        column: x => x.PostID,
+                        principalTable: "Posts",
+                        principalColumn: "PostID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PostTags_Tags_TagID",
+                        column: x => x.TagID,
+                        principalTable: "Tags",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LegalDocuments",
                 columns: table => new
                 {
-                    LegalID = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    LegalID = table.Column<long>(nullable: false),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MetaKeyword = table.Column<string>(nullable: true),
                     MetaDescription = table.Column<string>(nullable: true),
-                    IsDelete = table.Column<bool>(nullable: false, defaultValue: false),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Summary = table.Column<string>(nullable: true),
@@ -533,7 +540,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                     PublishNo = table.Column<string>(nullable: true),
                     PublishedDate = table.Column<DateTime>(nullable: true),
                     ExpirationDate = table.Column<DateTime>(nullable: true),
-                    IsPublish = table.Column<bool>(nullable: false, defaultValue: false),
+                    IsPublished = table.Column<bool>(nullable: false, defaultValue: false),
                     DocTypeID = table.Column<long>(nullable: true),
                     AgencyID = table.Column<long>(nullable: true),
                     AreaID = table.Column<long>(nullable: true),
@@ -620,7 +627,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Type = table.Column<string>(nullable: true),
                     LatiLongTude = table.Column<string>(nullable: true),
@@ -640,6 +647,123 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LegalDocumentFiles",
+                columns: table => new
+                {
+                    FileID = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FileName = table.Column<string>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    LegalID = table.Column<long>(nullable: false),
+                    AccountID = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LegalDocumentFiles", x => x.FileID);
+                    table.ForeignKey(
+                        name: "FK_LegalDocumentFiles_LegalDocuments_LegalID",
+                        column: x => x.LegalID,
+                        principalTable: "LegalDocuments",
+                        principalColumn: "LegalID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Parts",
+                columns: table => new
+                {
+                    PartID = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Contents = table.Column<string>(nullable: true),
+                    Idx = table.Column<int>(nullable: false, defaultValue: 0),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
+                    LegalID = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Parts", x => x.PartID);
+                    table.ForeignKey(
+                        name: "FK_Parts_LegalDocuments_LegalID",
+                        column: x => x.LegalID,
+                        principalTable: "LegalDocuments",
+                        principalColumn: "LegalID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Chapters",
+                columns: table => new
+                {
+                    ChapID = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PartID = table.Column<long>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
+                    Contents = table.Column<string>(nullable: true),
+                    Idx = table.Column<int>(nullable: false, defaultValue: 0),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    LegalID = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chapters", x => x.ChapID);
+                    table.ForeignKey(
+                        name: "FK_Chapters_Parts_PartID",
+                        column: x => x.PartID,
+                        principalTable: "Parts",
+                        principalColumn: "PartID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    ItemID = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChapID = table.Column<long>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Contents = table.Column<string>(nullable: true),
+                    Idx = table.Column<int>(nullable: false, defaultValue: 0),
+                    IsDeleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.ItemID);
+                    table.ForeignKey(
+                        name: "FK_Items_Chapters_ChapID",
+                        column: x => x.ChapID,
+                        principalTable: "Chapters",
+                        principalColumn: "ChapID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Articles",
+                columns: table => new
+                {
+                    ArticleID = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemID = table.Column<long>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
+                    Contents = table.Column<string>(nullable: true),
+                    Idx = table.Column<int>(nullable: false, defaultValue: 0),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    LegalID = table.Column<long>(nullable: false),
+                    DocAttach = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Articles", x => x.ArticleID);
+                    table.ForeignKey(
+                        name: "FK_Articles_Items_ItemID",
+                        column: x => x.ItemID,
+                        principalTable: "Items",
+                        principalColumn: "ItemID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Answers_QuesID",
                 table: "Answers",
@@ -647,9 +771,29 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Articles_ItemID",
+                table: "Articles",
+                column: "ItemID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Chapters_PartID",
+                table: "Chapters",
+                column: "PartID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Districts_ProvinceID",
                 table: "Districts",
                 column: "ProvinceID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Items_ChapID",
+                table: "Items",
+                column: "ChapID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LegalDocumentFiles_LegalID",
+                table: "LegalDocumentFiles",
+                column: "LegalID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LegalDocuments_AgencyID",
@@ -687,6 +831,21 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 column: "ProvinceID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Parts_LegalID",
+                table: "Parts",
+                column: "LegalID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_PostCategoryID",
+                table: "Posts",
+                column: "PostCategoryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostTags_TagID",
+                table: "PostTags",
+                column: "TagID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_QuestionComments_QuesID",
                 table: "QuestionComments",
                 column: "QuesID");
@@ -719,22 +878,16 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 name: "Articles");
 
             migrationBuilder.DropTable(
-                name: "Chapters");
-
-            migrationBuilder.DropTable(
-                name: "Items");
-
-            migrationBuilder.DropTable(
                 name: "LawOffices");
 
             migrationBuilder.DropTable(
                 name: "Lawyers");
 
             migrationBuilder.DropTable(
-                name: "LegalDocumentRelates");
+                name: "LegalDocumentFiles");
 
             migrationBuilder.DropTable(
-                name: "LegalDocuments");
+                name: "LegalDocumentRelates");
 
             migrationBuilder.DropTable(
                 name: "Notifications");
@@ -743,10 +896,7 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 name: "Pages");
 
             migrationBuilder.DropTable(
-                name: "Parts");
-
-            migrationBuilder.DropTable(
-                name: "Products");
+                name: "PostTags");
 
             migrationBuilder.DropTable(
                 name: "QuestionComments");
@@ -761,7 +911,37 @@ namespace LawProject.Infrastructure.Persistence.Migrations
                 name: "Wards");
 
             migrationBuilder.DropTable(
+                name: "Items");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
+
+            migrationBuilder.DropTable(
+                name: "Questions");
+
+            migrationBuilder.DropTable(
+                name: "Tags");
+
+            migrationBuilder.DropTable(
+                name: "Chapters");
+
+            migrationBuilder.DropTable(
+                name: "PostCategories");
+
+            migrationBuilder.DropTable(
+                name: "Parts");
+
+            migrationBuilder.DropTable(
+                name: "LegalDocuments");
+
+            migrationBuilder.DropTable(
                 name: "Agencies");
+
+            migrationBuilder.DropTable(
+                name: "Areas");
+
+            migrationBuilder.DropTable(
+                name: "Districts");
 
             migrationBuilder.DropTable(
                 name: "DocumentsTypes");
@@ -774,18 +954,6 @@ namespace LawProject.Infrastructure.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "LegalDocumentTypes");
-
-            migrationBuilder.DropTable(
-                name: "Questions");
-
-            migrationBuilder.DropTable(
-                name: "Tags");
-
-            migrationBuilder.DropTable(
-                name: "Districts");
-
-            migrationBuilder.DropTable(
-                name: "Areas");
 
             migrationBuilder.DropTable(
                 name: "Provinces");

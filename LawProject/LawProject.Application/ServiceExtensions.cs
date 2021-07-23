@@ -1,5 +1,4 @@
 ﻿using LawProject.Application.Behaviours;
-using LawProject.Application.Features.Products.Commands.CreateProduct;
 using AutoMapper;
 using FluentValidation;
 using MediatR;

@@ -43,8 +43,8 @@ namespace LawProject.Domain.Entities
         public string FooterRecipients { get; set; }
         public string FooterSigner { get; set; }
         public string FooterAppendix { get; set; } // FooterQuote
-        public bool IsTraining { get; set; }
-        public bool IsHasAppendix { get; set; } // IsHaveAppendix
+        public bool HasTrained { get; set; }
+        public bool HasAppendix { get; set; } // IsHaveAppendix
         public virtual LegalDocumentGroup LegalDocumentGroup { get; set; }
         public virtual Area Area { get; set; }
         public virtual DocumentsType DocumentsType { get; set; }
@@ -55,5 +55,7 @@ namespace LawProject.Domain.Entities
         public virtual Province Province { get; set; }
         public virtual IEnumerable<Part> Parts { get; set; }
         public virtual IEnumerable<LegalDocumentFile> LegalDocumentFiles { get; set; }
+        public virtual IEnumerable<LegalDocumentRelate> LegalDocumentRelates { get; set; }
+
     }
 }

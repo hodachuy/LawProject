@@ -5,8 +5,4 @@
     <Version>1.1.0</Version>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Events\LegalDocuments\" />
-  </ItemGroup>
-
 </Project>

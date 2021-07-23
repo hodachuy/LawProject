@@ -18,10 +18,10 @@ namespace LawProject.Infrastructure.Persistence.Configurations
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
             builder.Property(x => x.IsPublished).HasDefaultValue(false);
-            builder.Property(x => x.IsTrained).HasDefaultValue(false);
+            builder.Property(x => x.HasTrained).HasDefaultValue(false);
             builder.Property(x => x.LegalGroupID).IsRequired();
             builder.Property(x => x.ViewCount).HasDefaultValue(0);
-            builder.Property(x => x.IsHasAppendix).HasDefaultValue(false);
+            builder.Property(x => x.HasAppendix).HasDefaultValue(false);
             builder.Property(x => x.StatusValue).IsRequired();
 
             builder.HasOne<LegalDocumentGroup>(ad => ad.LegalDocumentGroup)
